@@ -24,14 +24,33 @@ export async function verifyFirebaseIdTokenFromReq(req: NextApiRequestWithCookie
   return decoded; // has uid, email, admin claims if present
 }
 
-// admin guard: simple check for custom claim "admin" OR check email in env list
+/**
+ * Admin guard: Checks for admin custom claim
+ * Priority: Custom claim (admin: true) > Email whitelist (fallback)
+ */
 export async function requireAdmin(req: NextApiRequestWithCookies) {
   const decoded = await verifyFirebaseIdTokenFromReq(req);
+  
+  // Check custom claim first (preferred method)
   const isAdminClaim = Boolean(decoded.admin);
-  const adminEmails = (process.env.ADMIN_EMAILS || "").split(",").map(s => s.trim()).filter(Boolean);
+  
+  // Fallback to email whitelist (for backward compatibility)
+  const adminEmails = (process.env.ADMIN_EMAILS || "")
+    .split(",")
+    .map(s => s.trim())
+    .filter(Boolean);
   const isAdminEmail = decoded.email ? adminEmails.includes(decoded.email) : false;
+  
   if (!isAdminClaim && !isAdminEmail) {
     throw new Error("Forbidden: admin only");
   }
+  
   return decoded;
+}
+
+/**
+ * Check if user is admin (for client-side use)
+ */
+export function isAdmin(decodedToken: any): boolean {
+  return Boolean(decodedToken?.admin);
 }
