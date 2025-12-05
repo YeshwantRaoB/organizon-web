@@ -38,6 +38,26 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 </div>
               </Link>
 
+              {/* Search Bar */}
+              <div className="hidden md:block flex-1 max-w-md mx-8">
+                <form action="/search" method="get" className="relative">
+                  <input
+                    type="text"
+                    name="q"
+                    placeholder="Search products..."
+                    className="w-full px-4 py-2 pr-10 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2d5016] focus:border-transparent"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#2d5016]"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </button>
+                </form>
+              </div>
+
               {/* Navigation */}
               <nav className="hidden md:flex items-center gap-8">
                 <Link href="/" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
@@ -46,8 +66,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <Link href="/catalog" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
                   Shop
                 </Link>
-                <Link href="/gallery" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
-                  Gallery
+                <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
+                  About
                 </Link>
                 <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
                   Contact
@@ -108,6 +128,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   <li><Link href="/policies/returns" className="hover:text-white transition-colors">Return & Refund</Link></li>
                   <li><Link href="/policies/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
                   <li><Link href="/policies/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
+                  <li><Link href="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
                 </ul>
               </div>
 

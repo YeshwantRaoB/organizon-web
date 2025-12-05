@@ -86,12 +86,27 @@ organizon-web/
 
 ## Key Pages
 
+### Customer Pages
 - **Homepage** (`/`): Hero section with brand story and featured content
 - **Catalog** (`/catalog`): Product listing with filters and sorting
+- **Product Detail** (`/products/[id]`): Individual product pages with full details
 - **Cart** (`/cart`): Shopping cart with quantity management
+- **Search** (`/search`): Product search functionality
 - **Gallery** (`/gallery`): Product image gallery with lightbox
+- **About** (`/about`): Company story, values, and process
 - **Contact** (`/contact`): Contact form and information
-- **Admin** (`/admin/products`): Product management (requires authentication)
+- **FAQ** (`/faq`): Frequently asked questions
+
+### Policy Pages
+- **Shipping Policy** (`/policies/shipping`): Delivery information
+- **Return & Refund** (`/policies/returns`): Return process and refunds
+- **Privacy Policy** (`/policies/privacy`): Data protection and privacy
+- **Terms of Service** (`/policies/terms`): Legal terms and conditions
+
+### Admin Pages
+- **Admin Dashboard** (`/admin/products`): Product management (requires authentication)
+- **Create Product** (`/admin/products/create`): Add new products
+- **Edit Product** (`/admin/products/edit/[id]`): Update products
 
 ## Design Philosophy
 
@@ -102,14 +117,31 @@ The design follows these principles:
 4. **Smooth Interactions**: Subtle animations and transitions
 5. **Mobile-First**: Responsive design that works on all devices
 
+## Implemented Features
+
+✅ Complete product catalog with filtering and sorting
+✅ Product detail pages with image galleries
+✅ Shopping cart with full functionality
+✅ Search functionality
+✅ User authentication (Google Sign-In)
+✅ Admin panel for product management
+✅ About page with company information
+✅ Contact form
+✅ FAQ page with categorized questions
+✅ All policy pages (Shipping, Returns, Privacy, Terms)
+✅ Image gallery with lightbox
+✅ Responsive design for all devices
+✅ SEO optimization
+✅ Accessibility compliance
+
 ## Future Enhancements
 
-- Payment gateway integration (Razorpay)
+- Payment gateway integration (Razorpay - package installed)
 - Order tracking system
 - Product reviews and ratings
 - Wishlist functionality
 - Email notifications
-- Advanced search with filters
+- Newsletter subscription
 - Multi-language support
 
 ## License

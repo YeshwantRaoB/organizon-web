@@ -73,7 +73,14 @@ export default function AdminProductsPageClient() {
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-semibold">Admin — Products</h1>
-          <Link href="/admin/products/create" className="bg-organicGreen text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors duration-300">Create Product</Link>
+          <div className="flex gap-3">
+            <Link href="/admin/bulk-upload" className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300">
+              Bulk Upload
+            </Link>
+            <Link href="/admin/products/create" className="bg-organicGreen text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors duration-300">
+              Create Product
+            </Link>
+          </div>
         </div>
 
         <div className="mt-4">
