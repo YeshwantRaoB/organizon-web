@@ -9,7 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        organicGreen: '#4CAF50',
+        organicGreen: '#2d5016',
+        organicGreenLight: '#3d6820',
+        organicGreenDark: '#1d3510',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

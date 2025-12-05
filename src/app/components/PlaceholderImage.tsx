@@ -1,23 +1,44 @@
-const PlaceholderImage = ({ width = '100%', height = '100%' }) => (
-  <svg
-    width={width}
-    height={height}
-    viewBox="0 0 100 100"
-    preserveAspectRatio="xMidYMid slice"
-    xmlns="http://www.w3.org/2000/svg"
-    role="img"
-    aria-label="Placeholder image"
+interface PlaceholderImageProps {
+  width?: string | number;
+  height?: string | number;
+  text?: string;
+}
+
+const PlaceholderImage = ({ width = '100%', height = '100%', text = 'Image Placeholder' }: PlaceholderImageProps) => (
+  <div
     style={{
-      backgroundColor: '#f0f0f0',
-      color: '#aaa',
+      width,
+      height,
+      backgroundColor: '#e5e7eb',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#9ca3af',
+      fontSize: '14px',
+      fontWeight: '500',
       textAlign: 'center',
-      fontSize: '12px',
+      padding: '20px',
     }}
+    role="img"
+    aria-label={text}
   >
-    <text x="50%" y="50%" dy=".3em" dominantBaseline="middle" textAnchor="middle">
-      Image
-    </text>
-  </svg>
+    <div>
+      <svg
+        className="mx-auto mb-2"
+        width="48"
+        height="48"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      >
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+        <circle cx="8.5" cy="8.5" r="1.5" />
+        <polyline points="21 15 16 10 5 21" />
+      </svg>
+      <div>{text}</div>
+    </div>
+  </div>
 );
 
 export default PlaceholderImage;

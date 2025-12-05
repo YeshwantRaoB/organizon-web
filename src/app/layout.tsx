@@ -1,121 +1,148 @@
-// src/app/layout.tsx
-
 import "./globals.css";
 import { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Inter } from 'next/font/google';
+import SignInButton from "./components/SignInButton";
 
 const inter = Inter({ subsets: ['latin'] });
 
-// Make sure this path matches your folder structure
-import SignInButton from "./components/SignInButton";
-
 export const metadata = {
-  title: "Organizon Organics",
-  description: "100% organic farm-sourced foods — rice, millets, oils, spices, honey & more.",
+  title: "Organizon Organics - Pure Organic Foods from Farm to Family",
+  description: "100% organic farm-sourced foods — rice, millets, oils, spices, honey & more. Grown naturally by trusted Indian farmers.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen flex flex-col bg-gradient-to-b from-white to-[#F7FFF7] text-slate-900`}>
+      <body className={`${inter.className} min-h-screen flex flex-col bg-white text-gray-900`}>
 
-        {/* ---------------------- HEADER ---------------------- */}
-        <header className="bg-white shadow-md sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-
-            {/* Logo + Brand name */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-12 h-12">
-                <Image
-                  src="/logo.jpg"  // replace with your actual logo file
-                  alt="Organizon Logo"
-                  fill
-                  className="object-contain group-hover:scale-110 transition-transform"
-                />
-              </div>
-              <div>
-                <h1 className="text-lg font-bold tracking-wide">Organizon Organics</h1>
-                <p className="text-xs text-slate-500 -mt-1">Farm to your plate</p>
-              </div>
-            </Link>
-
-            {/* Navigation */}
-            <nav className="flex items-center gap-6">
-              <Link href="/catalog" className="hover:text-organicGreen transition-colors text-sm font-medium">
-                Catalog
-              </Link>
-              <Link href="/gallery" className="hover:text-organicGreen transition-colors text-sm font-medium">
-                Gallery
-              </Link>
-              <Link href="/contact" className="hover:text-organicGreen transition-colors text-sm font-medium">
-                Contact
+        {/* Header */}
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+            {/* Top Bar */}
+            <div className="flex items-center justify-between py-4">
+              {/* Logo */}
+              <Link href="/" className="flex items-center gap-3 group">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden">
+                  <Image
+                    src="/logo.jpg"
+                    alt="Organizon Organics Logo"
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-gray-900 tracking-tight">Organizon Organics</h1>
+                  <p className="text-xs text-gray-500">Pure. Natural. Organic.</p>
+                </div>
               </Link>
 
-              {/* Cart Button */}
-              <Link
-                href="/cart"
-                className="btn btn-primary !py-1.5 !px-4 text-sm shadow hover:shadow-md transition-all"
-              >
-                Cart
-              </Link>
+              {/* Navigation */}
+              <nav className="hidden md:flex items-center gap-8">
+                <Link href="/" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
+                  Home
+                </Link>
+                <Link href="/catalog" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
+                  Shop
+                </Link>
+                <Link href="/gallery" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
+                  Gallery
+                </Link>
+                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
+                  Contact
+                </Link>
+              </nav>
 
-              {/* Sign-in Button */}
-              <div className="ml-2">
+              {/* Right Side Actions */}
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/cart"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  <span className="hidden sm:inline">Cart</span>
+                </Link>
                 <SignInButton />
               </div>
-            </nav>
+            </div>
           </div>
         </header>
 
-        {/* ---------------------- MAIN CONTENT ---------------------- */}
+        {/* Main Content */}
         <main className="flex-1">
           {children}
         </main>
 
-        {/* ---------------------- FOOTER ---------------------- */}
-        <footer className="bg-white border-t mt-16">
-          <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-
-            {/* About */}
-            <div>
-              <h3 className="font-semibold text-lg mb-2">Organizon Organics</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Pure, farm-sourced organic foods grown naturally by trusted Indian farmers.
-              </p>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h3 className="font-semibold text-lg mb-2">Contact Us</h3>
-              <p className="text-sm text-slate-600">📞 WhatsApp: +91 XXXXXXXXXX</p>
-              <p className="text-sm text-slate-600">✉️ Email: support@organizon.in</p>
-              <p className="text-sm text-slate-600">🪪 FSSAI: XXXXXXXXXXXXXX</p>
-            </div>
-
-            {/* Social Media and Quick Links */}
-            <div>
-              <h3 className="font-semibold text-lg mb-2">Follow Us</h3>
-              <div className="flex space-x-4 mt-2">
-                <a href="#" className="text-slate-600 hover:text-organicGreen"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-                <a href="#" className="text-slate-600 hover:text-organicGreen"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 1.4 2.8 3.2 2.8 5.1 0 1.4-.5 2.7-1.5 3.7-1.1 1-2.5 1.6-4 1.6h-1.3c-1.2 0-2.3-.5-3.2-1.3-.8-.8-1.3-1.9-1.3-3.1 0-1.2.5-2.3 1.3-3.2.8-.8 1.9-1.3 3.2-1.3H18c.6 0 1.2.2 1.6.6.4.4.6 1 .6 1.6 0 .6-.2 1.2-.6 1.6-.4.4-1 .6-1.6.6h-1.3c-.6 0-1.2-.2-1.6-.6-.4-.4-.6-1-.6-1.6s.2-1.2.6-1.6c.4-.4 1-.6 1.6-.6H18c1.7 0 3.3-1.4 3.3-3.3S19.7 4 18 4h-1.3c-1.7 0-3.3 1.4-3.3 3.3 0 .6.2 1.2.6 1.6.4.4 1 .6 1.6.6h1.3c.6 0 1.2-.2 1.6-.6.4-.4.6-1 .6-1.6s-.2-1.2-.6-1.6c-.4-.4-1-.6-1.6-.6H15c-2.8 0-5 2.2-5 5s2.2 5 5 5h1.3c2.8 0 5-2.2 5-5 0-1.9-1.2-3.5-2.8-4.6z"></path></svg></a>
-                <a href="#" className="text-slate-600 hover:text-organicGreen"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+        {/* Footer */}
+        <footer className="bg-[#2d5016] text-white mt-20">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+              
+              {/* About */}
+              <div>
+                <h3 className="font-bold text-lg mb-4">Organizon Organics</h3>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  Pure, farm-sourced organic foods grown naturally by trusted Indian farmers. Our commitment to purity, people, and the planet.
+                </p>
               </div>
-              <h3 className="font-semibold text-lg mb-2 mt-4">Quick Links</h3>
-              <ul className="space-y-1 text-sm text-slate-600">
-                <li><Link href="/about" className="hover:text-organicGreen">About Us</Link></li>
-                <li><Link href="/policies/shipping" className="hover:text-organicGreen">Shipping Policy</Link></li>
-                <li><Link href="/policies/returns" className="hover:text-organicGreen">Return Policy</Link></li>
-                <li><Link href="/policies/privacy" className="hover:text-organicGreen">Privacy Policy</Link></li>
-              </ul>
+
+              {/* Quick Links */}
+              <div>
+                <h3 className="font-bold text-lg mb-4">Quick Links</h3>
+                <ul className="space-y-2 text-sm text-gray-300">
+                  <li><Link href="/catalog" className="hover:text-white transition-colors">Shop All Products</Link></li>
+                  <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                  <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+                  <li><Link href="/gallery" className="hover:text-white transition-colors">Gallery</Link></li>
+                </ul>
+              </div>
+
+              {/* Policies */}
+              <div>
+                <h3 className="font-bold text-lg mb-4">Policies</h3>
+                <ul className="space-y-2 text-sm text-gray-300">
+                  <li><Link href="/policies/shipping" className="hover:text-white transition-colors">Shipping Policy</Link></li>
+                  <li><Link href="/policies/returns" className="hover:text-white transition-colors">Return & Refund</Link></li>
+                  <li><Link href="/policies/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                  <li><Link href="/policies/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
+                </ul>
+              </div>
+
+              {/* Contact */}
+              <div>
+                <h3 className="font-bold text-lg mb-4">Contact Us</h3>
+                <ul className="space-y-2 text-sm text-gray-300">
+                  <li>📞 WhatsApp: +91 XXXXXXXXXX</li>
+                  <li>✉️ support@organizon.in</li>
+                  <li>🪪 FSSAI: XXXXXXXXXXXXXX</li>
+                </ul>
+                <div className="flex gap-4 mt-4">
+                  <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                  </a>
+                  <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                  </a>
+                  <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
 
-          </div>
-
-          {/* Footer Bottom */}
-          <div className="text-center py-4 text-xs text-slate-400 border-t">
-            © {new Date().getFullYear()} Organizon Organics. All rights reserved.
+            {/* Bottom Bar */}
+            <div className="border-t border-green-800 pt-6 text-center text-sm text-gray-300">
+              <p>© {new Date().getFullYear()} Organizon Organics. All rights reserved.</p>
+            </div>
           </div>
         </footer>
 

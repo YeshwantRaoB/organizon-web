@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { auth } from "../lib/firebaseClient";
 import {
   GoogleAuthProvider,
@@ -93,10 +93,10 @@ export default function SignInButton() {
     router.push(path);
   };
 
-  if (loading) return <div className="px-3 py-1">Loading...</div>;
+  if (loading) return <div className="px-3 py-1 text-sm text-gray-500">Loading...</div>;
   if (error)
     return (
-      <div className="px-3 py-1 text-red-500">Authentication error</div>
+      <div className="px-3 py-1 text-sm text-red-500">Auth error</div>
     );
 
   return (
@@ -104,7 +104,7 @@ export default function SignInButton() {
       {!user ? (
         <button
           onClick={handleGoogleSignIn}
-          className="inline-flex items-center gap-2 btn btn-primary text-sm px-3 py-1.5"
+          className="inline-flex items-center gap-2 bg-[#2d5016] hover:bg-[#3d6820] text-white font-medium text-sm px-4 py-2 rounded-md transition-all shadow-sm hover:shadow-md"
           aria-haspopup="menu"
         >
           <svg
@@ -113,9 +113,9 @@ export default function SignInButton() {
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
           >
-            <path fill="#4285F4" d="M44 20H24v8h11.3C34.8 31.9 30.8 36 24 36c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.4 0 6.4 1.2 8.7 3.2l6-6C34 3.9 29.4 2 24 2 12.9 2 4 10.9 4 22s8.9 20 20 20 20-8.9 20-20c0-1.4-.1-2.7-.3-4z" />
+            <path fill="#FFF" d="M44 20H24v8h11.3C34.8 31.9 30.8 36 24 36c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.4 0 6.4 1.2 8.7 3.2l6-6C34 3.9 29.4 2 24 2 12.9 2 4 10.9 4 22s8.9 20 20 20 20-8.9 20-20c0-1.4-.1-2.7-.3-4z" />
           </svg>
-          Sign in
+          Sign In
         </button>
       ) : (
         <>
@@ -123,26 +123,26 @@ export default function SignInButton() {
             onClick={() => setOpen((s) => !s)}
             aria-expanded={open}
             aria-haspopup="menu"
-            className="flex items-center gap-2 rounded-full px-2 py-1 hover:bg-slate-100 transition"
+            className="flex items-center gap-2 rounded-full px-2 py-1 hover:bg-gray-100 transition-colors"
           >
             {user.photoURL ? (
               <Image
                 src={user.photoURL}
                 alt={user.displayName || "avatar"}
-                width={36}
-                height={36}
-                className="rounded-full"
+                width={32}
+                height={32}
+                className="rounded-full border-2 border-gray-200"
               />
             ) : (
-              <div className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-sm">
+              <div className="w-8 h-8 rounded-full bg-[#2d5016] text-white flex items-center justify-center text-sm font-semibold">
                 {user.displayName?.charAt(0) || "U"}
               </div>
             )}
-            <span className="hidden sm:inline-block text-sm font-medium">
+            <span className="hidden sm:inline-block text-sm font-medium text-gray-700">
               {user.displayName?.split(" ")[0] || user.email}
             </span>
             <svg
-              className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`}
+              className={`w-4 h-4 text-gray-500 transition-transform ${open ? "rotate-180" : ""}`}
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden
@@ -211,25 +211,12 @@ export default function SignInButton() {
               </button>
             </div>
 
-            <div className="border-t px-3 py-2 flex items-center justify-between gap-2">
+            <div className="border-t px-3 py-2">
               <button
                 onClick={handleSignOut}
-                className="btn text-sm !px-3 !py-1 rounded-md"
+                className="w-full bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
               >
-                Sign out
-              </button>
-              <button
-                onClick={() => {
-                  // quick dev helper: copy token to clipboard for testing APIs
-                  user.getIdToken().then((t) => {
-                    void navigator.clipboard.writeText(t);
-                    alert("ID token copied to clipboard (for testing).");
-                  });
-                }}
-                className="text-xs text-slate-500 hover:underline"
-                title="Copy token"
-              >
-                Copy token
+                Sign Out
               </button>
             </div>
           </div>
