@@ -63,42 +63,57 @@ export default function AdminProductsPageClient() {
   return (
     <ProtectedClient>
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-semibold">Admin — Products</h1>
-          <Link href="/admin/products/create" className="btn btn-primary">Create Product</Link>
+          <Link href="/admin/products/create" className="bg-organicGreen text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors duration-300">Create Product</Link>
         </div>
 
         <div className="mt-4">
-          {loading && <div className="text-sm text-slate-500">Loading…</div>}
-          {error && <div className="text-sm text-red-500">{error}</div>}
-
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {products?.map(p => (
-              <div key={p._id || p.sku} className="border rounded-lg p-4">
-                <div className="h-40 bg-gray-50 flex items-center justify-center rounded">
-                  {p.images && p.images.length ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={p.images[0]} alt={p.name} className="object-contain h-full" />
-                  ) : (
-                    <div className="text-sm text-slate-400">No image</div>
-                  )}
-                </div>
-                <div className="mt-3">
-                  <div className="font-medium">{p.name}</div>
-                  <div className="text-sm text-slate-500">SKU: {p.sku}</div>
-                  <div className="mt-2 flex items-center justify-between">
-                    <div className="text-sm font-semibold">₹{p.price}</div>
-                    <div className="text-xs text-slate-500">Stock: {p.stock}</div>
-                  </div>
-                </div>
-
-                <div className="mt-3 flex gap-2">
-                  <Link href={`/admin/products/edit/${encodeURIComponent(p._id || p.sku)}`} className="btn !py-1 px-3">Edit</Link>
-                  <button onClick={() => handleDelete(p._id || p.sku)} className="btn !py-1 px-3">Delete</button>
-                </div>
-              </div>
-            ))}
-          </div>
+          {loading && <div className="text-center py-10">Loading...</div>}
+          {error && <div className="text-center py-10 text-red-500">Error: {error}</div>}
+          {!loading && !error && (
+            <div className="bg-white border rounded-lg overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SKU</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>
+                    <th scope="col" className="relative px-6 py-3"><span className="sr-only">Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {products?.map(p => (
+                    <tr key={p._id || p.sku}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 h-10 w-10">
+                            {p.images && p.images.length ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img className="h-10 w-10 rounded-full object-cover" src={p.images[0]} alt={p.name} />
+                            ) : (
+                              <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-xs text-gray-400">No Image</div>
+                            )}
+                          </div>
+                          <div className="ml-4">
+                            <div className="text-sm font-medium text-gray-900">{p.name}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{p.sku}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹{p.price}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{p.stock}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <Link href={`/admin/products/edit/${encodeURIComponent(p._id || p.sku)}`} className="text-indigo-600 hover:text-indigo-900">Edit</Link>
+                        <button onClick={() => handleDelete(p._id || p.sku)} className="ml-4 text-red-600 hover:text-red-900">Delete</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
     </ProtectedClient>
