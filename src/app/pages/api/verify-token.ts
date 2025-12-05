@@ -11,8 +11,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     const decoded = await adminAuth.verifyIdToken(token);
     return res.status(200).json({ ok: true, uid: decoded.uid, email: decoded.email || undefined, name: decoded.name || undefined });
-  } catch (err: any) {
+  } catch (err) {
     console.error("verify-token error:", err);
-    return res.status(401).json({ ok: false, error: err.message || "Invalid token" });
+    if (err instanceof Error) {
+      return res.status(401).json({ ok: false, error: err.message });
+    } else {
+      return res.status(401).json({ ok: false, error: "Invalid token" });
+    }
   }
 }

@@ -1,7 +1,7 @@
 // pages/api/products/[id].ts
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiResponse } from "next";
 import { getDb } from "../../../lib/mongo";
-import { requireAdmin } from "../../../lib/apiAuth";
+import { requireAdmin, NextApiRequestWithCookies } from "../../../lib/apiAuth";
 import { ObjectId } from "mongodb";
 import { z } from "zod";
 
@@ -18,7 +18,7 @@ const updateSchema = z.object({
   tags: z.array(z.string()).optional(),
 });
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequestWithCookies, res: NextApiResponse) {
   const db = await getDb();
   const products = db.collection("products");
   const { id } = req.query;
@@ -43,33 +43,43 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === "PUT") {
       await requireAdmin(req);
       const parsed = updateSchema.safeParse(req.body);
-      if (!parsed.success) return res.status(400).json({ ok: false, error: parsed.error.errors });
+      if (!parsed.success) return res.status(400).json({ ok: false, error: parsed.error.flatten() });
 
-      const update = { ...parsed.data, updatedAt: new Date().toISOString() } as any;
+      const update = { ...parsed.data, updatedAt: new Date().toISOString() };
 
-      let filter: any = {};
-      if (ObjectId.isValid(String(id))) filter = { _id: new ObjectId(String(id)) };
-      else filter = { sku: String(id) };
+      let filter: { _id: ObjectId } | { sku: string };
+      if (ObjectId.isValid(String(id))) {
+        filter = { _id: new ObjectId(String(id)) };
+      } else {
+        filter = { sku: String(id) };
+      }
 
       const r = await products.findOneAndUpdate(filter, { $set: update }, { returnDocument: "after" });
-      if (!r.value) return res.status(404).json({ ok: false, error: "Not found" });
-      return res.status(200).json({ ok: true, product: r.value });
+      if (!r) return res.status(404).json({ ok: false, error: "Not found" });
+      return res.status(200).json({ ok: true, product: r });
     }
 
     // DELETE (admin)
     if (req.method === "DELETE") {
       await requireAdmin(req);
-      let filter: any = {};
-      if (ObjectId.isValid(String(id))) filter = { _id: new ObjectId(String(id)) };
-      else filter = { sku: String(id) };
+      let filter: { _id: ObjectId } | { sku: string };
+      if (ObjectId.isValid(String(id))) {
+        filter = { _id: new ObjectId(String(id)) };
+      } else {
+        filter = { sku: String(id) };
+      }
       const r = await products.findOneAndDelete(filter);
-      if (!r.value) return res.status(404).json({ ok: false, error: "Not found" });
-      return res.status(200).json({ ok: true, product: r.value });
+      if (!r) return res.status(404).json({ ok: false, error: "Not found" });
+      return res.status(200).json({ ok: true, product: r });
     }
 
     return res.status(405).json({ ok: false, error: "Method not allowed" });
-  } catch (err: any) {
+  } catch (err) {
     console.error("products/[id] error:", err);
-    return res.status(500).json({ ok: false, error: err.message || "Server error" });
+    if (err instanceof Error) {
+      return res.status(500).json({ ok: false, error: err.message });
+    } else {
+      return res.status(500).json({ ok: false, error: "Server error" });
+    }
   }
 }

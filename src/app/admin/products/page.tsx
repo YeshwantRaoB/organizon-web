@@ -35,8 +35,12 @@ export default function AdminProductsPageClient() {
         if (!mounted) return;
         if (!resp.ok) throw new Error(j?.error || "Failed to load");
         setProducts(j.items || []);
-      } catch (err: any) {
-        setError(err.message || "Error");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       } finally {
         setLoading(false);
       }
@@ -55,8 +59,12 @@ export default function AdminProductsPageClient() {
       if (!res.ok) throw new Error(j?.error || "Delete failed");
       setProducts(prev => prev ? prev.filter(p => p._id !== j.product._id && p.sku !== j.product.sku) : prev);
       alert("Deleted");
-    } catch (err: any) {
-      alert("Delete failed: " + (err.message || err));
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        alert("Delete failed: " + err.message);
+      } else {
+        alert("An unknown error occurred while deleting.");
+      }
     }
   };
 

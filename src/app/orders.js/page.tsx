@@ -4,7 +4,6 @@
 import React, { useEffect, useState } from "react";
 import ProtectedClient from "../components/ProtectedClient";
 import { auth } from "../lib/firebaseClient";
-import Image from "next/image";
 
 type OrderItem = {
   sku: string;
@@ -53,9 +52,13 @@ export default function OrdersPageClient() {
         }
         setOrders(data.orders || []);
         setLoading(false);
-      } catch (err: any) {
+      } catch (err) {
         console.error("fetchOrders error:", err);
-        setError(err.message || "Failed to fetch orders");
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
         setLoading(false);
       }
     }
@@ -81,8 +84,8 @@ export default function OrdersPageClient() {
 
         <div className="space-y-4 mt-4">
           {orders?.map((o) => (
-            <div key={o.id} className="border rounded-lg p-4">
-              <div className="flex items-start justify-between">
+            <div key={o.id} className="bg-white border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="flex items-start justify-between p-6">
                 <div>
                   <div className="text-sm text-slate-500">Order ID</div>
                   <div className="font-medium">{o.id}</div>
@@ -94,10 +97,10 @@ export default function OrdersPageClient() {
                 </div>
               </div>
 
-              <div className="mt-3 border-t pt-3">
-                <ul className="space-y-2">
+              <div className="mt-4 border-t border-gray-200">
+                <ul className="divide-y divide-gray-200">
                   {o.items.map((it) => (
-                    <li key={it.sku} className="flex items-center justify-between">
+                    <li key={it.sku} className="flex items-center justify-between p-6">
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 bg-gray-100 rounded-md flex items-center justify-center text-xs">Img</div>
                         <div>
@@ -112,7 +115,7 @@ export default function OrdersPageClient() {
                   ))}
                 </ul>
 
-                <div className="mt-3 flex items-center justify-between">
+                <div className="mt-4 flex items-center justify-between p-6 bg-gray-50 rounded-b-lg">
                   <div className="text-sm text-slate-500">Total</div>
                   <div className="font-semibold">₹{o.total}</div>
                 </div>

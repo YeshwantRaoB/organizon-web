@@ -1,12 +1,13 @@
 // pages/api/products/index.ts
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiResponse } from "next";
+import type { NextApiRequestWithCookies } from "../../../lib/apiAuth";
 import { getDb } from "../../../lib/mongo";
 import { requireAdmin } from "../../../lib/apiAuth";
 import { z } from "zod";
 import { ObjectId } from "mongodb";
 
 type Product = {
-  _id?: any;
+  _id?: ObjectId;
   sku: string;
   name: string;
   category: string;
@@ -36,7 +37,7 @@ const createSchema = z.object({
   tags: z.array(z.string()).optional().default([]),
 });
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequestWithCookies, res: NextApiResponse) {
   const db = await getDb();
   const products = db.collection("products");
 
@@ -47,7 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const limit = Math.min(100, Number(req.query.limit) || 24);
       const skip = (page - 1) * limit;
 
-      const filter: any = {};
+      const filter: { category?: string; subcategory?: string; $text?: { $search: string } } = {};
       if (req.query.category) filter.category = String(req.query.category);
       if (req.query.subcategory) filter.subcategory = String(req.query.subcategory);
       if (req.query.search) {
@@ -66,7 +67,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // protected - admin only
       await requireAdmin(req);
       const parsed = createSchema.safeParse(req.body);
-      if (!parsed.success) return res.status(400).json({ ok: false, error: parsed.error.errors });
+      if (!parsed.success) return res.status(400).json({ ok: false, error: parsed.error.flatten() });
 
       const data: Product = {
         ...parsed.data,
@@ -77,14 +78,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const existing = await products.findOne({ sku: data.sku });
       if (existing) return res.status(409).json({ ok: false, error: "SKU already exists" });
 
-      const r = await products.insertOne(data as any);
+      const r = await products.insertOne(data);
       const created = await products.findOne({ _id: r.insertedId });
       return res.status(201).json({ ok: true, product: created });
     }
 
     return res.status(405).json({ ok: false, error: "Method not allowed" });
-  } catch (err: any) {
+  } catch (err) {
     console.error("products(index) error:", err);
-    return res.status(500).json({ ok: false, error: err.message || "Server error" });
+    if (err instanceof Error) {
+      return res.status(500).json({ ok: false, error: err.message });
+    } else {
+      return res.status(500).json({ ok: false, error: "Server error" });
+    }
   }
 }

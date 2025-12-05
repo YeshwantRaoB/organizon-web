@@ -1,9 +1,10 @@
 // scripts/seed-products.js
 // Node-compatible seed script (no deprecated MongoClient options)
 // Usage: node scripts/seed-products.js
-require("dotenv").config({ path: ".env.local" }); // load env from .env.local
+import dotenv from 'dotenv';
+dotenv.config({ path: ".env.local" }); // load env from .env.local
 
-const { MongoClient } = require("mongodb");
+import { MongoClient } from 'mongodb';
 
 const uri = process.env.MONGODB_URI;
 const dbName = process.env.MONGODB_DB || "organizon";
@@ -116,7 +117,7 @@ async function run() {
     process.exit(0);
   } catch (err) {
     console.error("Seed error:", err);
-    try { await client.close(); } catch(e) {}
+    try { await client.close(); } catch {}
     process.exit(1);
   }
 }

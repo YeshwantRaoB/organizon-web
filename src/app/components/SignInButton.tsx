@@ -6,8 +6,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
-  type User,
-} from "firebase/auth";
+  } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Image from "next/image";
 import Cookies from "js-cookie";

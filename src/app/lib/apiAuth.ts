@@ -1,15 +1,21 @@
 // lib/apiAuth.ts
 import type { NextApiRequest } from "next";
+
+export interface NextApiRequestWithCookies extends NextApiRequest {
+  cookies: {
+    [key: string]: string;
+  };
+}
 import { adminAuth } from "./firebaseAdmin";
 
-export async function verifyFirebaseIdTokenFromReq(req: NextApiRequest) {
+export async function verifyFirebaseIdTokenFromReq(req: NextApiRequestWithCookies) {
   // check Authorization header, then cookie, then body
   const authHeader = req.headers.authorization;
   let token = undefined;
   if (authHeader && authHeader.startsWith("Bearer ")) {
     token = authHeader.split("Bearer ")[1];
-  } else if ((req as any).cookies?.firebase_token) {
-    token = (req as any).cookies.firebase_token;
+  } else if (req.cookies?.firebase_token) {
+    token = req.cookies.firebase_token;
   } else if (req.body?.token) {
     token = req.body.token;
   }
@@ -19,7 +25,7 @@ export async function verifyFirebaseIdTokenFromReq(req: NextApiRequest) {
 }
 
 // admin guard: simple check for custom claim "admin" OR check email in env list
-export async function requireAdmin(req: NextApiRequest) {
+export async function requireAdmin(req: NextApiRequestWithCookies) {
   const decoded = await verifyFirebaseIdTokenFromReq(req);
   const isAdminClaim = Boolean(decoded.admin);
   const adminEmails = (process.env.ADMIN_EMAILS || "").split(",").map(s => s.trim()).filter(Boolean);
