@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../lib/firebaseClient";
 import ProtectedClient from "../components/ProtectedClient";
 
 interface Stats {
@@ -21,14 +23,25 @@ interface Stats {
 }
 
 export default function AdminDashboard() {
+  const [user] = useAuthState(auth);
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadStats() {
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
       try {
-        const res = await fetch("/api/admin/stats");
+        const token = await user.getIdToken();
+        const res = await fetch("/api/admin/stats", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const data = await res.json();
         
         if (!res.ok) {
@@ -44,7 +57,7 @@ export default function AdminDashboard() {
     }
 
     loadStats();
-  }, []);
+  }, [user]);
 
   return (
     <ProtectedClient>
@@ -198,6 +211,20 @@ export default function AdminDashboard() {
                     <div>
                       <h3 className="font-semibold text-gray-900">Users</h3>
                       <p className="text-sm text-gray-600">Manage users and admins</p>
+                    </div>
+                  </div>
+                </Link>
+
+                <Link href="/admin/pages" className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">Pages</h3>
+                      <p className="text-sm text-gray-600">Edit website pages</p>
                     </div>
                   </div>
                 </Link>

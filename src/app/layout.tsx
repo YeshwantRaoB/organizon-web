@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Inter } from 'next/font/google';
 import SignInButton from "./components/SignInButton";
+import AdminBar from "./components/AdminBar";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -59,20 +61,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </div>
 
               {/* Navigation */}
-              <nav className="hidden md:flex items-center gap-8">
-                <Link href="/" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
-                  Home
-                </Link>
-                <Link href="/catalog" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
-                  Shop
-                </Link>
-                <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
-                  About
-                </Link>
-                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors">
-                  Contact
-                </Link>
-              </nav>
+              <Navbar />
 
               {/* Right Side Actions */}
               <div className="flex items-center gap-4">
@@ -95,6 +84,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main className="flex-1">
           {children}
         </main>
+
+        {/* Admin Bar (only visible to admins) */}
+        <AdminBar />
 
         {/* Footer */}
         <footer className="bg-[#2d5016] text-white mt-20">
