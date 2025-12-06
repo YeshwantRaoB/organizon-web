@@ -46,11 +46,11 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
           {/* Overlay Content */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-white px-4 md:px-8 max-w-4xl animate-slide-up">
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight drop-shadow-2xl">
+            <div className="text-center px-4 md:px-8 max-w-4xl animate-slide-up">
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight drop-shadow-2xl text-white">
                   &ldquo;Where Every Grain Has a Story&rdquo;
                 </h1>
-                <p className="text-base md:text-lg lg:text-xl mb-10 leading-relaxed drop-shadow-lg font-light max-w-2xl mx-auto">
+                <p className="text-base md:text-lg lg:text-xl mb-10 leading-relaxed drop-shadow-lg font-light max-w-2xl mx-auto text-white">
                   We partner with real Indian farmers to bring you pure, natural, farm-grown Jaggery, Rice, Millets, Honey & Oils.
                 </p>
               <Link

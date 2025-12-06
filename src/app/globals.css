@@ -56,11 +56,54 @@ html {
 }
 
 body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
+  background-color: #ffffff !important;
+  color: #111827 !important;
   font-feature-settings: "rlig" 1, "calt" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Force text visibility - ensure all text is dark by default, but allow white text */
+h1:not(.text-white), h2:not(.text-white), h3:not(.text-white), h4:not(.text-white), h5:not(.text-white), h6:not(.text-white) {
+  color: #111827;
+}
+
+p:not(.text-white), span:not(.text-white), li:not(.text-white), div:not(.text-white) {
+  color: #374151;
+}
+
+a:not(.text-white) {
+  color: #2d5016;
+}
+
+/* Ensure buttons have proper contrast */
+button {
+  font-weight: 600;
+}
+
+/* Override any problematic utility classes */
+.text-white {
+  color: #ffffff !important;
+}
+
+.text-gray-900 {
+  color: #111827 !important;
+}
+
+.text-gray-800 {
+  color: #1f2937 !important;
+}
+
+.text-gray-700 {
+  color: #374151 !important;
+}
+
+.text-gray-600 {
+  color: #4b5563 !important;
+}
+
+.text-gray-500 {
+  color: #6b7280 !important;
 }
 
 /* Form Input Styles */
