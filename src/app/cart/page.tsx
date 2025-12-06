@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useCartStore } from '../lib/cartStore';
 
 export default function CartPage() {
@@ -26,20 +27,20 @@ export default function CartPage() {
             <h2 className="text-xl font-semibold mb-4">Cart Items</h2>
             <ul className="divide-y divide-border">
               {cartItems.map(item => (
-                <li key={item.id} className="flex items-center justify-between py-4">
+                <li key={item._id} className="flex items-center justify-between py-4">
                   <div className="flex items-center gap-4">
-                    <img src={item.imageUrl || '/placeholder.svg'} alt={item.name} className="w-20 h-20 object-cover rounded-md bg-muted" />
+                    <Image src={item.images?.[0] || '/hero.png'} alt={item.name} width={80} height={80} className="object-cover rounded-md bg-muted" />
                     <div>
                       <p className="font-semibold">{item.name}</p>
                       <div className="flex items-center gap-2 mt-2">
                         <input
                           type="number"
                           value={item.quantity}
-                          onChange={(e) => updateQuantity(item.id, Math.max(1, parseInt(e.target.value, 10)))}
+                          onChange={(e) => updateQuantity(item._id, Math.max(1, parseInt(e.target.value, 10)))}
                           className="w-16 text-center border rounded-md bg-background"
                           min="1"
                         />
-                        <button onClick={() => removeFromCart(item.id)} className="text-destructive hover:underline text-sm">Remove</button>
+                        <button onClick={() => removeFromCart(item._id)} className="text-destructive hover:underline text-sm">Remove</button>
                       </div>
                     </div>
                   </div>
