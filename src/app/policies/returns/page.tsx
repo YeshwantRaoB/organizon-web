@@ -41,7 +41,7 @@ export default function ReturnsPolicyPage() {
                 <li>Send clear photos of the product and packaging</li>
                 <li>Our team will verify and approve the return</li>
                 <li>Pack the product securely in original packaging</li>
-                <li>We'll arrange pickup or provide return address</li>
+                <li>We&apos;ll arrange pickup or provide return address</li>
               </ol>
             </section>
 
@@ -54,21 +54,21 @@ export default function ReturnsPolicyPage() {
                 <li>Refund will be initiated within 3-5 business days</li>
                 <li>Amount will be credited to original payment method</li>
                 <li>Bank processing may take 5-7 business days</li>
-                <li>You'll receive confirmation via email and SMS</li>
+                <li>You&apos;ll receive confirmation via email and SMS</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Exchange Policy</h2>
               <p className="leading-relaxed">
-                We offer exchanges for damaged or defective products. If you'd like to exchange a product, please contact us within 7 days of delivery. We'll arrange for a replacement to be sent once we receive the returned item.
+                We offer exchanges for damaged or defective products. If you&apos;d like to exchange a product, please contact us within 7 days of delivery. We&apos;ll arrange for a replacement to be sent once we receive the returned item.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Cancellation Policy</h2>
               <p className="leading-relaxed">
-                You can cancel your order before it's shipped. Once shipped, you'll need to follow the return process. To cancel, go to "My Orders" and click "Cancel Order" or contact our support team.
+                You can cancel your order before it&apos;s shipped. Once shipped, you&apos;ll need to follow the return process. To cancel, go to &quot;My Orders&quot; and click &quot;Cancel Order&quot; or contact our support team.
               </p>
             </section>
 

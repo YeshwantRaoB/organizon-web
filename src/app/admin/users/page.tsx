@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from 'next/image';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../lib/firebaseClient";
 import ProtectedClient from "../../components/ProtectedClient";
@@ -22,13 +23,7 @@ export default function UsersManagement() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    if (user) {
-      loadUsers();
-    }
-  }, [user]);
-
-  async function loadUsers() {
+  const loadUsers = useCallback(async () => {
     if (!user) return;
 
     try {
@@ -47,7 +42,13 @@ export default function UsersManagement() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      loadUsers();
+    }
+  }, [user, loadUsers]);
 
   const filteredUsers = users.filter((user) =>
     user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -139,10 +140,12 @@ export default function UsersManagement() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center gap-3">
                             {user.photoURL ? (
-                              <img
+                              <Image
                                 src={user.photoURL}
                                 alt={user.displayName}
-                                className="w-10 h-10 rounded-full"
+                                width={40}
+                                height={40}
+                                className="rounded-full"
                               />
                             ) : (
                               <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-medium">

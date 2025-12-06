@@ -1,12 +1,12 @@
-// lib/apiAuth.ts
 import type { NextApiRequest } from "next";
+import { adminAuth } from "./firebaseAdmin";
+import { DecodedIdToken } from 'firebase-admin/auth';
 
 export interface NextApiRequestWithCookies extends NextApiRequest {
   cookies: {
     [key: string]: string;
   };
 }
-import { adminAuth } from "./firebaseAdmin";
 
 export async function verifyFirebaseIdTokenFromReq(req: NextApiRequestWithCookies) {
   // check Authorization header, then cookie, then body
@@ -51,6 +51,7 @@ export async function requireAdmin(req: NextApiRequestWithCookies) {
 /**
  * Check if user is admin (for client-side use)
  */
-export function isAdmin(decodedToken: any): boolean {
+
+export function isAdmin(decodedToken: DecodedIdToken | null | undefined): boolean {
   return Boolean(decodedToken?.admin);
 }

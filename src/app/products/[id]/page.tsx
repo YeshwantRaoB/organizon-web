@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import PlaceholderImage from '../../components/PlaceholderImage';
 import { useCartStore } from '../../lib/cartStore';
 import toast from 'react-hot-toast';
@@ -55,14 +56,12 @@ export default function ProductDetailPage() {
     for (let i = 0; i < quantity; i++) {
       addToCart({
         _id: product._id,
-        id: product._id,
         name: product.name,
         price: product.price,
         unit: product.unit,
         stock: product.stock,
         imageUrl: product.images?.[0],
         images: product.images,
-        quantity: 1,
       });
     }
     
@@ -121,10 +120,11 @@ export default function ProductDetailPage() {
             <div className="bg-white rounded-xl overflow-hidden shadow-lg mb-4">
               <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]">
                 {product.images && product.images.length > 0 ? (
-                  <img
+                  <Image
                     src={product.images[selectedImage]}
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    layout="fill"
+                    objectFit="cover"
                   />
                 ) : (
                   <PlaceholderImage width="100%" height="100%" text={product.name} />
@@ -146,10 +146,11 @@ export default function ProductDetailPage() {
                     }`}
                     aria-label={`View image ${index + 1}`}
                   >
-                    <img
+                    <Image
                       src={image}
                       alt={`${product.name} ${index + 1}`}
-                      className="w-full h-full object-cover"
+                      layout="fill"
+                      objectFit="cover"
                     />
                   </button>
                 ))}

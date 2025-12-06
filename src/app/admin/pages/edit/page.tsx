@@ -1,18 +1,26 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import ProtectedClient from "../../../components/ProtectedClient";
 
+type PageSection = object;
+
+
 function PageEditorContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const pagePath = searchParams?.get("path") || "/";
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [pageData, setPageData] = useState<any>(null);
+  const [pageData, setPageData] = useState<{
+    path: string;
+    title: string;
+    metaDescription?: string;
+    content?: string;
+    sections?: PageSection[];
+  } | null>(null);
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
@@ -180,7 +188,7 @@ function PageEditorContent() {
                     <input
                       type="text"
                       value={pageData?.title || ""}
-                      onChange={(e) => setPageData({ ...pageData, title: e.target.value })}
+                      onChange={(e) => setPageData(prev => prev ? { ...prev, title: e.target.value } : null)}
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2d5016]"
                       placeholder="Enter page title"
                     />
@@ -192,7 +200,7 @@ function PageEditorContent() {
                     </label>
                     <textarea
                       value={pageData?.metaDescription || ""}
-                      onChange={(e) => setPageData({ ...pageData, metaDescription: e.target.value })}
+                      onChange={(e) => setPageData(prev => prev ? { ...prev, metaDescription: e.target.value } : null)}
                       rows={3}
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2d5016]"
                       placeholder="Enter meta description for SEO"
@@ -226,7 +234,7 @@ function PageEditorContent() {
                     </label>
                     <textarea
                       value={pageData?.content || ""}
-                      onChange={(e) => setPageData({ ...pageData, content: e.target.value })}
+                      onChange={(e) => setPageData(prev => prev ? { ...prev, content: e.target.value } : null)}
                       rows={15}
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2d5016] font-mono text-sm"
                       placeholder="Enter HTML content or use the visual editor (coming soon)"

@@ -12,7 +12,10 @@ export async function GET(request: NextRequest) {
     const productsCollection = db.collection("products");
 
     // Build query
-    const query: any = {};
+    const query: { 
+      category?: string;
+      $or?: ({ name: { $regex: string; $options: string; } } | { description: { $regex: string; $options: string; } })[];
+    } = {};
     
     if (category && category !== "all") {
       query.category = category;

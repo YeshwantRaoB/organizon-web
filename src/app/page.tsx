@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import PlaceholderImage from './components/PlaceholderImage';
+import Image from 'next/image';
 import ProductCard from './components/ProductCard';
 import { useEffect, useState } from 'react';
 
@@ -35,10 +35,12 @@ export default function Home() {
       {/* Hero Section with Large Image */}
       <section className="relative w-full bg-organicCream overflow-hidden">
         <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px]">
-          <img
+          <Image
             src="/hero.png"
             alt="Organizon Organics - Pure Organic Foods"
-            className="w-full h-full object-cover"
+            layout="fill"
+            objectFit="cover"
+            priority
           />
           {/* Overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
@@ -67,10 +69,12 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
             <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-xl animate-scale-in">
-              <img
-                src="//organizonorganics.myshopify.com/cdn/shop/files/Yellow_And_Green_Traditional_Indian_Farmer_YouTube_Thumbnail_1.png?v=1764692208&width=3840"
+              <Image
+                src="https://organizonorganics.myshopify.com/cdn/shop/files/Yellow_And_Green_Traditional_Indian_Farmer_YouTube_Thumbnail_1.png?v=1764692208&width=3840"
                 alt="Indian farmers working in organic fields"
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                layout="fill"
+                objectFit="cover"
+                className="hover:scale-110 transition-transform duration-700"
               />
             </div>
 
@@ -118,10 +122,12 @@ export default function Home() {
             </div>
 
             <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-xl animate-scale-in order-1 lg:order-2" style={{animationDelay: '0.2s'}}>
-              <img
-                src="//organizonorganics.myshopify.com/cdn/shop/files/ChatGPT_Image_Dec_2_2025_10_04_27_PM.png?v=1764693292&width=1500"
+              <Image
+                src="https://organizonorganics.myshopify.com/cdn/shop/files/ChatGPT_Image_Dec_2_2025_10_04_27_PM.png?v=1764693292&width=1500"
                 alt="Organic products from Organizon"
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                layout="fill"
+                objectFit="cover"
+                className="hover:scale-110 transition-transform duration-700"
               />
             </div>
           </div>

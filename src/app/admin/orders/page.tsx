@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../lib/firebaseClient";
@@ -24,13 +24,7 @@ export default function OrdersManagement() {
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    if (user) {
-      loadOrders();
-    }
-  }, [user]);
-
-  async function loadOrders() {
+  const loadOrders = useCallback(async () => {
     if (!user) return;
 
     try {
@@ -49,7 +43,13 @@ export default function OrdersManagement() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      loadOrders();
+    }
+  }, [user, loadOrders]);
 
   async function updateOrderStatus(orderId: string, newStatus: string) {
     try {

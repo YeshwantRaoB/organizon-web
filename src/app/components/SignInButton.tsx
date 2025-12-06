@@ -34,7 +34,7 @@ export default function SignInButton() {
         });
         const data = await res.json();
         setIsAdmin(data.isAdmin);
-      } catch (error) {
+      } catch {
         setIsAdmin(false);
       }
     }

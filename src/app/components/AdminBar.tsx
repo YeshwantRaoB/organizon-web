@@ -28,7 +28,7 @@ export default function AdminBar() {
         });
         const data = await res.json();
         setIsAdmin(data.ok);
-      } catch (error) {
+      } catch { 
         setIsAdmin(false);
       } finally {
         setLoading(false);

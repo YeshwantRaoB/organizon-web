@@ -42,7 +42,7 @@ export default function SettingsPage() {
       }
     }
     loadSettings();
-  }, []);
+  }, [settings]);
 
   async function handleSave() {
     setSaving(true);

@@ -3,9 +3,7 @@ import { MongoClient, Db } from "mongodb";
 
 declare global {
   // allow global cache in dev to avoid reconnects
-  // eslint-disable-next-line no-var
   var __mongoClientPromise: Promise<MongoClient> | undefined;
-  // eslint-disable-next-line no-var
   var __mongoClient: MongoClient | undefined;
 }
 

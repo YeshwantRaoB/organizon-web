@@ -87,7 +87,7 @@ function SearchContent() {
           <>
             <div className="mb-6">
               <h1 className="text-3xl font-bold text-gray-900">
-                Search Results for "{query}"
+                Search Results for &quot;{query}&quot;
               </h1>
               <p className="text-gray-600 mt-2">
                 Found {products.length} product{products.length !== 1 ? 's' : ''}
@@ -135,7 +135,7 @@ function SearchContent() {
             </svg>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Start Searching</h2>
             <p className="text-gray-600">
-              Enter a product name or category to find what you're looking for
+              Enter a product name or category to find what you&apos;re looking for
             </p>
           </div>
         )}

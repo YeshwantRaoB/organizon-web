@@ -58,14 +58,16 @@ function BulkUploadContent() {
         
         const products = lines.slice(1).map(line => {
           const values = line.split(',').map(v => v.trim());
-          const product: any = {};
+          const product: Partial<BulkProduct> = {};
           
           headers.forEach((header, index) => {
             const value = values[index];
-            if (header === 'price' || header === 'stock') {
-              product[header] = parseFloat(value) || 0;
+            const key = header as keyof BulkProduct;
+
+            if (key === 'price' || key === 'stock') {
+              (product[key] as number) = parseFloat(value) || 0;
             } else {
-              product[header] = value;
+              (product[key] as string) = value;
             }
           });
           
@@ -194,7 +196,7 @@ function BulkUploadContent() {
             <li>Download a template file (CSV or JSON) below</li>
             <li>Fill in your product information following the template format</li>
             <li>Upload the completed file</li>
-            <li>Review the preview and click "Upload Products"</li>
+            <li>Review the preview and click &quot;Upload Products&quot;</li>
           </ol>
         </div>
 

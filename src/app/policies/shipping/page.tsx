@@ -37,7 +37,7 @@ export default function ShippingPolicyPage() {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Order Tracking</h2>
               <p className="leading-relaxed">
-                Once your order is shipped, you will receive a tracking number via email and SMS. You can track your order status in the "My Orders" section of your account.
+                Once your order is shipped, you will receive a tracking number via email and SMS. You can track your order status in the &quot;My Orders&quot; section of your account.
               </p>
             </section>
 

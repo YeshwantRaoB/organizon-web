@@ -27,7 +27,7 @@ export default function AboutPage() {
                   Today, we work with over 100 farmers across India, bringing you the finest organic products straight from the farm to your family. Every product we offer is a testament to our commitment to quality, sustainability, and the well-being of our customers.
                 </p>
                 <p>
-                  We believe in transparency, traceability, and trust. That's why we personally visit our partner farms, ensure organic certification, and maintain the highest standards of quality control.
+                  We believe in transparency, traceability, and trust. That&apos;s why we personally visit our partner farms, ensure organic certification, and maintain the highest standards of quality control.
                 </p>
               </div>
             </div>
@@ -51,7 +51,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl md:text-2xl font-serif font-bold text-gray-900 mb-3">Purity</h3>
               <p className="text-gray-600 leading-relaxed">
-                We ensure every product is 100% organic, free from chemicals, pesticides, and GMOs. Purity is not just a promise—it's our guarantee.
+                We ensure every product is 100% organic, free from chemicals, pesticides, and GMOs. Purity is not just a promise—it&apos;s our guarantee.
               </p>
             </div>
 
@@ -75,7 +75,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl md:text-2xl font-serif font-bold text-gray-900 mb-3">Planet</h3>
               <p className="text-gray-600 leading-relaxed">
-                Sustainable farming practices protect our environment. We're committed to reducing our carbon footprint and preserving nature for future generations.
+                Sustainable farming practices protect our environment. We&apos;re committed to reducing our carbon footprint and preserving nature for future generations.
               </p>
             </div>
           </div>
