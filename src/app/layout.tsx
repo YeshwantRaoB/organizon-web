@@ -2,12 +2,17 @@ import "./globals.css";
 import { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Inter } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 import SignInButton from "./components/SignInButton";
 import AdminBar from "./components/AdminBar";
 import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ['latin'] });
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  weight: ['400', '700']
+});
 
 export const metadata = {
   title: "Organizon Organics - Pure Organic Foods from Farm to Family",
@@ -17,10 +22,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen flex flex-col bg-white text-gray-900`}>
+      <body className={`${inter.className} ${playfair.variable} min-h-screen flex flex-col bg-white text-gray-900`}>
 
         {/* Header */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <header className="bg-white/95 backdrop-blur-sm border-b border-organicGreen/20 sticky top-0 z-50 shadow-sm">
           <div className="max-w-[1400px] mx-auto px-4 md:px-8">
             {/* Top Bar */}
             <div className="flex items-center justify-between py-4">
@@ -46,12 +51,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   <input
                     type="text"
                     name="q"
-                    placeholder="Search products..."
-                    className="w-full px-4 py-2 pr-10 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2d5016] focus:border-transparent"
+                    placeholder="Search organic products..."
+                    className="w-full px-4 py-2 pr-10 text-sm border border-organicGreen/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-organicGreen focus:border-organicGreen/50 bg-organicCream/50"
                   />
                   <button
                     type="submit"
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#2d5016]"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-organicGreen transition-colors duration-200"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -67,7 +72,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <div className="flex items-center gap-4">
                 <Link
                   href="/cart"
-                  className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-[#2d5016] transition-colors"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-organicGreen transition-colors duration-200"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -89,9 +94,21 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <AdminBar />
 
         {/* Footer */}
-        <footer className="bg-[#2d5016] text-white mt-20">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <footer className="bg-gradient-to-br from-organicGreen via-organicGreen to-organicGreenDark text-white mt-20 relative overflow-hidden">
+          {/* Subtle texture overlay */}
+          <div className="absolute inset-0 opacity-10">
+            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <pattern id="footerTexture" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <circle cx="5" cy="5" r="1" fill="white" opacity="0.3"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#footerTexture)"/>
+            </svg>
+          </div>
+
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8 py-16 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
               
               {/* About */}
               <div>
@@ -152,9 +169,36 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </div>
             </div>
 
+            {/* Newsletter Signup */}
+            <div className="border-t border-green-700 pt-8 mb-8">
+              <div className="text-center">
+                <h3 className="text-xl font-serif font-bold mb-4">Stay Connected with Nature</h3>
+                <p className="text-green-100 mb-6 max-w-md mx-auto">Subscribe to receive updates on new organic products, farming stories, and exclusive offers.</p>
+                <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white/50"
+                  />
+                  <button className="bg-white text-organicGreen font-semibold px-6 py-3 rounded-lg hover:bg-green-50 transition-colors duration-300 shadow-lg">
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+            </div>
+
             {/* Bottom Bar */}
-            <div className="border-t border-green-800 pt-6 text-center text-sm text-gray-300">
-              <p>© {new Date().getFullYear()} Organizon Organics. All rights reserved.</p>
+            <div className="border-t border-green-700 pt-8 text-center">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p className="text-sm text-green-100">© {new Date().getFullYear()} Organizon Organics. All rights reserved.</p>
+                <div className="flex items-center gap-2 text-sm text-green-100">
+                  <span>Made with</span>
+                  <svg className="w-4 h-4 text-red-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                  </svg>
+                  <span>for organic living</span>
+                </div>
+              </div>
             </div>
           </div>
         </footer>
