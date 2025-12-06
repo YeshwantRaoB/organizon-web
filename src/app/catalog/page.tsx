@@ -87,32 +87,32 @@ export default function CatalogPage() {
   });
 
   return (
-    <div className="bg-[#f8f9f5] min-h-screen py-8">
+    <div className="bg-organicCream min-h-screen py-8 md:py-12">
       <div className="max-w-[1400px] mx-auto px-4 md:px-8">
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Our Products</h1>
-          <p className="text-gray-600">Discover our range of 100% organic, farm-sourced products</p>
+        <div className="mb-8 md:mb-12">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">Our Products</h1>
+          <p className="text-base md:text-lg text-gray-600">Discover our range of 100% organic, farm-sourced products</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           {/* Sidebar Filters */}
           <aside className="lg:col-span-1">
-            <div className="bg-white border border-gray-200 rounded-lg p-6 sticky top-24">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Filters</h3>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 sticky top-24 shadow-sm">
+              <h3 className="text-xl font-bold text-gray-900 mb-6">Filters</h3>
               
               {/* Category Filter */}
               <div className="mb-6">
-                <h4 className="text-sm font-semibold text-gray-700 mb-3">Category</h4>
-                <div className="space-y-2">
+                <h4 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">Category</h4>
+                <div className="space-y-1.5">
                   {categories.map((category) => (
                     <button
                       key={category}
                       onClick={() => setSelectedCategory(category)}
-                      className={`block w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
+                      className={`block w-full text-left px-4 py-2.5 rounded-lg text-sm transition-all duration-200 ${
                         selectedCategory === category
-                          ? 'bg-[#2d5016] text-white font-medium'
-                          : 'text-gray-700 hover:bg-gray-100'
+                          ? 'bg-organicGreen text-white font-semibold shadow-md'
+                          : 'text-gray-700 hover:bg-gray-50 hover:text-organicGreen'
                       }`}
                     >
                       {category}
@@ -123,11 +123,11 @@ export default function CatalogPage() {
 
               {/* Sort By */}
               <div>
-                <h4 className="text-sm font-semibold text-gray-700 mb-3">Sort By</h4>
+                <h4 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">Sort By</h4>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#2d5016] focus:border-transparent"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-organicGreen/50 focus:border-organicGreen bg-white"
                 >
                   <option value="name">Name (A-Z)</option>
                   <option value="price-low">Price (Low to High)</option>
@@ -139,21 +139,25 @@ export default function CatalogPage() {
 
           {/* Products Grid */}
           <main className="lg:col-span-3">
-            <div className="mb-4 flex items-center justify-between">
-              <p className="text-sm text-gray-600">
-                Showing {sortedProducts.length} product{sortedProducts.length !== 1 ? 's' : ''}
+            <div className="mb-6 flex items-center justify-between">
+              <p className="text-sm md:text-base text-gray-600 font-medium">
+                Showing <span className="font-bold text-gray-900">{sortedProducts.length}</span> product{sortedProducts.length !== 1 ? 's' : ''}
               </p>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {sortedProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-
-            {sortedProducts.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-gray-500">No products found in this category.</p>
+            {sortedProducts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                {sortedProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            ) : (
+              <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+                <svg className="w-20 h-20 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                </svg>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">No products found</h3>
+                <p className="text-gray-600">Try selecting a different category.</p>
               </div>
             )}
           </main>
