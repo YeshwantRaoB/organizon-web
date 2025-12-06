@@ -27,7 +27,7 @@ export default function AdminBar() {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
-        setIsAdmin(data.isAdmin);
+        setIsAdmin(data.ok);
       } catch (error) {
         setIsAdmin(false);
       } finally {

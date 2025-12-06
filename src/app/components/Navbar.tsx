@@ -22,8 +22,8 @@ export default function Navbar() {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
-        setIsAdmin(data.isAdmin);
-      } catch (error) {
+        setIsAdmin(data.ok);
+      } catch {
         setIsAdmin(false);
       }
     }

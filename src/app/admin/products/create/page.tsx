@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { uploadToCloudinary } from "@/app/lib/cloudinary";
 import { ProductFormData } from "@/app/lib/types";
 import { useRouter } from "next/navigation";
+import toast from 'react-hot-toast';
 import ProductForm from "../ProductForm";
 
 export default function AdminCreateProduct() {
@@ -28,16 +29,19 @@ export default function AdminCreateProduct() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const toastId = toast.loading('Creating product...');
     setUploading(true);
     try {
-      // upload images first
       const uploadedUrls: string[] = [];
-      for (const f of images) {
-        const res = await uploadToCloudinary(f);
-        uploadedUrls.push(res.url);
+      if (images.length > 0) {
+        toast.loading('Uploading images...', { id: toastId });
+        for (const f of images) {
+          const res = await uploadToCloudinary(f);
+          uploadedUrls.push(res.url);
+        }
       }
 
-      // require admin token via api/admin/check already in list page; here we simply post
+      toast.loading('Saving product details...', { id: toastId });
       const resp = await fetch("/api/products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -45,13 +49,13 @@ export default function AdminCreateProduct() {
       });
       const j = await resp.json();
       if (!resp.ok) throw new Error(j?.error || "Create failed");
-      alert("Created");
+      toast.success('Product created successfully!', { id: toastId });
       router.push("/admin/products");
     } catch (err) {
       if (err instanceof Error) {
-        alert("Create failed: " + err.message);
+        toast.error(`Create failed: ${err.message}`, { id: toastId });
       } else {
-        alert("An unknown error occurred.");
+        toast.error('An unknown error occurred.', { id: toastId });
       }
     } finally {
       setUploading(false);

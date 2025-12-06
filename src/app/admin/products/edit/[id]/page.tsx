@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { uploadToCloudinary } from "@/app/lib/cloudinary";
 import { useRouter, useParams } from "next/navigation";
+import toast from 'react-hot-toast';
 import { ProductFormData } from "@/app/lib/types";
 import ProductForm from "../../ProductForm";
 
@@ -37,9 +38,9 @@ export default function AdminEditProduct() {
         });
       } catch (err) {
         if (err instanceof Error) {
-          alert("Failed to load product: " + err.message);
+          toast.error(`Failed to load product: ${err.message}`);
         } else {
-          alert("An unknown error occurred while loading the product.");
+          toast.error('An unknown error occurred while loading the product.');
         }
         router.push("/admin/products");
       } finally {
@@ -61,14 +62,20 @@ export default function AdminEditProduct() {
   async function onSave(e: React.FormEvent) {
     e.preventDefault();
     if (!form) return;
+    const toastId = toast.loading('Saving product...');
     setSaving(true);
     try {
       const uploaded: string[] = [];
-      for (const f of images) {
-        const r = await uploadToCloudinary(f);
-        uploaded.push(r.url);
+      if (images.length > 0) {
+        toast.loading('Uploading images...', { id: toastId });
+        for (const f of images) {
+          const r = await uploadToCloudinary(f);
+          uploaded.push(r.url);
+        }
       }
       const finalImages = [...(form.images || []), ...uploaded];
+
+      toast.loading('Saving product details...', { id: toastId });
       const resp = await fetch(`/api/products/${encodeURIComponent(id)}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -76,13 +83,13 @@ export default function AdminEditProduct() {
       });
       const j = await resp.json();
       if (!resp.ok) throw new Error(j?.error || "Save failed");
-      alert("Saved");
+      toast.success('Product saved successfully!', { id: toastId });
       router.push("/admin/products");
     } catch (err) {
       if (err instanceof Error) {
-        alert("Save failed: " + err.message);
+        toast.error(`Save failed: ${err.message}`, { id: toastId });
       } else {
-        alert("An unknown error occurred while saving.");
+        toast.error('An unknown error occurred while saving.', { id: toastId });
       }
     } finally {
       setSaving(false);

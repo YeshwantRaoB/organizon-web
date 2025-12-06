@@ -74,7 +74,7 @@ const categories = ['All', 'Rice & Grains', 'Oils', 'Spices & Condiments', 'Swee
 
 export default function CatalogPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [sortBy, setSortBy] = useState('name');
+    const [sortBy, setSortBy] = useState('name');
 
   const filteredProducts = products.filter(
     (product) => selectedCategory === 'All' || product.category === selectedCategory

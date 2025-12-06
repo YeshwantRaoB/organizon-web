@@ -54,15 +54,15 @@ export default function Home() {
           {/* Overlay Content */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white px-4 md:px-8 max-w-4xl animate-slide-up">
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight drop-shadow-lg">
+                <h1 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 leading-tight drop-shadow-lg">
                   &ldquo;Where Every Grain Has a Story&rdquo;
                 </h1>
-                <p className="text-base md:text-lg lg:text-xl mb-8 leading-relaxed drop-shadow-md font-light">
+                <p className="text-sm md:text-base lg:text-lg mb-8 leading-relaxed drop-shadow-md font-light">
                   We partner with real Indian farmers to bring you pure, natural, farm-grown Jaggery, Rice, Millets, Honey & Oils.
                 </p>
               <Link
                 href="/catalog"
-                className="inline-block bg-organicGreen hover:bg-organicGreenLight text-white font-semibold text-lg px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-organicGreen/50"
+                className="inline-block bg-organicGreen hover:bg-organicGreenLight text-white font-semibold text-base px-6 py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-organicGreen/50"
               >
                 Shop Now
               </Link>

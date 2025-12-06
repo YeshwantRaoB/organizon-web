@@ -1,5 +1,7 @@
 import PlaceholderImage from './PlaceholderImage';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useCartStore } from '../lib/cartStore';
 
 interface ProductCardProps {
   product: {
@@ -13,21 +15,18 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    // TODO: Implement cart functionality
-    console.log('Adding to cart:', product);
-  };
+  const { addToCart } = useCartStore();
 
   return (
     <div className="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300">
       <Link href={`/products/${product.id}`}>
         <div className="relative w-full h-72 bg-gray-100 overflow-hidden">
           {product.imageUrl ? (
-            <img 
+            <Image 
               src={product.imageUrl} 
               alt={product.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
           ) : (
             <div className="group-hover:scale-105 transition-transform duration-300">
@@ -54,7 +53,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       </Link>
       <div className="px-4 pb-4">
         <button 
-          onClick={handleAddToCart}
+          onClick={() => addToCart({ ...product, _id: product.id })}
           className="w-full bg-[#2d5016] text-white py-2.5 px-4 rounded-md font-medium hover:bg-[#3d6820] transition-all duration-300 shadow-sm hover:shadow-md disabled:bg-gray-300 disabled:cursor-not-allowed"
           disabled={product.stock === 0}
         >
