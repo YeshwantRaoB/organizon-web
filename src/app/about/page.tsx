@@ -163,7 +163,7 @@ export default function AboutPage() {
           </p>
           <a
             href="/catalog"
-            className="inline-block bg-organicGreen hover:bg-organicGreenLight text-white font-semibold text-lg px-10 py-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+             className="inline-block bg-green-700 hover:bg-green-800 text-white font-semibold text-lg px-10 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-700/50"
           >
             Shop Now
           </a>
