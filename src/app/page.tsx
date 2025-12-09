@@ -177,9 +177,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             <div className="text-center p-8 bg-organicCream rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group animate-slide-up border border-gray-100">
-              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-organicGreen to-organicGreenLight rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-organicGreen to-organicGreenLight rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <Image
-                    src="/home_logos/100Organic.png" alt="100% Organic" width={80} height={80} className="object-cover"
+                    src="/home_logos/100Organic.png" alt="100% Organic" width={120} height={120} className="object-cover"
                   />
                 </div>
               <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">100% Organic</h3>
@@ -187,9 +187,9 @@ export default function Home() {
             </div>
 
             <div className="text-center p-8 bg-organicCream rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group animate-slide-up border border-gray-100" style={{animationDelay: '0.1s'}}>
-              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-organicGreen to-organicGreenLight rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-organicGreen to-organicGreenLight rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <Image
-                    src="/home_logos/farmSourced.png" alt="100% Organic" width={80} height={80} className="object-cover"
+                    src="/home_logos/farmSourced.png" alt="100% Organic" width={120} height={120} className="object-cover"
                   />
               </div>
               <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">Farm-Sourced</h3>
@@ -197,9 +197,9 @@ export default function Home() {
             </div>
 
             <div className="text-center p-8 bg-organicCream rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group animate-slide-up border border-gray-100" style={{animationDelay: '0.2s'}}>
-              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-organicGreen to-organicGreenLight rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-organicGreen to-organicGreenLight rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <Image
-                    src="/home_logos/qualityAssured.png" alt="100% Organic" width={80} height={80} className="object-cover"
+                    src="/home_logos/qualityAssured.png" alt="100% Organic" width={120} height={120} className="object-cover"
                   />
               </div>
               <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">Quality Assured</h3>
