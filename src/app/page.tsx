@@ -178,19 +178,19 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             <div className="text-center p-8 bg-organicCream rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group animate-slide-up border border-gray-100">
               <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-organicGreen to-organicGreenLight rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
+                  <Image
+                    src="/home_logos/100Organic.png" alt="100% Organic" width={80} height={80} className="object-cover"
+                  />
+                </div>
               <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">100% Organic</h3>
               <p className="text-gray-700 leading-relaxed">No chemicals, no pesticides. Just pure, natural goodness from certified organic farms that follow traditional farming wisdom.</p>
             </div>
 
             <div className="text-center p-8 bg-organicCream rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group animate-slide-up border border-gray-100" style={{animationDelay: '0.1s'}}>
               <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-organicGreen to-organicGreenLight rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
+                <Image
+                    src="/home_logos/farmSourced.png" alt="100% Organic" width={80} height={80} className="object-cover"
+                  />
               </div>
               <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">Farm-Sourced</h3>
               <p className="text-gray-700 leading-relaxed">Directly from our trusted network of local Indian farmers who have been cultivating the land with care for generations.</p>
@@ -198,9 +198,9 @@ export default function Home() {
 
             <div className="text-center p-8 bg-organicCream rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group animate-slide-up border border-gray-100" style={{animationDelay: '0.2s'}}>
               <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-organicGreen to-organicGreenLight rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <Image
+                    src="/home_logos/qualityAssured.png" alt="100% Organic" width={80} height={80} className="object-cover"
+                  />
               </div>
               <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">Quality Assured</h3>
               <p className="text-gray-700 leading-relaxed">Every product undergoes rigorous testing for purity, nutritional value, and quality to ensure you receive only the best.</p>
