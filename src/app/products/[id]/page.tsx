@@ -208,17 +208,17 @@ export default function ProductDetailPage() {
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+                  className="w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-md hover:bg-organicGreen hover:text-white hover:border-organicGreen text-gray-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-organicGreen/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-700"
                   disabled={product.stock === 0}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                   </svg>
                 </button>
-                <span className="text-xl font-semibold w-12 text-center">{quantity}</span>
+                <span className="text-xl font-semibold w-12 text-center text-gray-900">{quantity}</span>
                 <button
                   onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                  className="w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+                  className="w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-md hover:bg-organicGreen hover:text-white hover:border-organicGreen text-gray-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-organicGreen/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-700"
                   disabled={product.stock === 0}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -233,7 +233,7 @@ export default function ProductDetailPage() {
               <button
                 onClick={handleAddToCart}
                 disabled={product.stock === 0}
-                className="w-full bg-organicGreen hover:bg-organicGreenLight text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+                className="w-full bg-organicGreen hover:bg-organicGreenLight text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-organicGreen/50 disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none disabled:hover:bg-gray-400"
               >
                 {addedToCart ? (
                   <span className="flex items-center justify-center gap-2">
@@ -249,7 +249,7 @@ export default function ProductDetailPage() {
               <button
                 onClick={handleBuyNow}
                 disabled={product.stock === 0}
-                className="w-full bg-white border-2 border-organicGreen text-organicGreen hover:bg-organicGreen hover:text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+                className="w-full bg-white border-2 border-organicGreen text-organicGreen hover:bg-organicGreen hover:text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-4 focus:ring-organicGreen/50 disabled:border-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-gray-400"
               >
                 Buy Now
               </button>

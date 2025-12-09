@@ -79,10 +79,10 @@ export default function CartPage() {
                         <div className="flex flex-wrap items-center gap-4">
                           <div className="flex items-center gap-2">
                             <label className="text-sm font-medium text-gray-700">Quantity:</label>
-                            <div className="flex items-center border border-gray-300 rounded-md">
+                            <div className="flex items-center border-2 border-gray-300 rounded-md overflow-hidden">
                               <button
                                 onClick={() => updateQuantity(item._id, Math.max(1, item.quantity - 1))}
-                                className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 transition-colors"
+                                className="w-8 h-8 flex items-center justify-center hover:bg-organicGreen hover:text-white text-gray-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-organicGreen/50"
                                 aria-label="Decrease quantity"
                               >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,12 +93,12 @@ export default function CartPage() {
                                 type="number"
                                 value={item.quantity}
                                 onChange={(e) => updateQuantity(item._id, Math.max(1, parseInt(e.target.value, 10) || 1))}
-                                className="w-12 h-8 text-center border-0 focus:outline-none focus:ring-0 text-sm font-medium"
+                                className="w-12 h-8 text-center border-0 focus:outline-none focus:ring-0 text-sm font-medium text-gray-900"
                                 min="1"
                               />
                               <button
                                 onClick={() => updateQuantity(item._id, item.quantity + 1)}
-                                className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 transition-colors"
+                                className="w-8 h-8 flex items-center justify-center hover:bg-organicGreen hover:text-white text-gray-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-organicGreen/50"
                                 aria-label="Increase quantity"
                               >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,7 +165,7 @@ export default function CartPage() {
                     </div>
                   </div>
                 </div>
-                <button className="w-full bg-organicGreen hover:bg-organicGreenLight text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] mb-4">
+                <button className="w-full bg-organicGreen hover:bg-organicGreenLight text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] mb-4 focus:outline-none focus:ring-4 focus:ring-organicGreen/50">
                   Proceed to Checkout
                 </button>
                 <Link 

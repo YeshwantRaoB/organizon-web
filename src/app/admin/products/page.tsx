@@ -74,10 +74,10 @@ export default function AdminProductsPageClient() {
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-semibold">Admin — Products</h1>
           <div className="flex gap-3">
-            <Link href="/admin/bulk-upload" className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300">
+            <Link href="/admin/bulk-upload" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-600/50">
               Bulk Upload
             </Link>
-            <Link href="/admin/products/create" className="bg-organicGreen text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors duration-300">
+            <Link href="/admin/products/create" className="bg-organicGreen hover:bg-organicGreenLight text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-organicGreen/50">
               Create Product
             </Link>
           </div>
@@ -120,8 +120,8 @@ export default function AdminProductsPageClient() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹{p.price}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{p.stock}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <Link href={`/admin/products/edit/${encodeURIComponent(p._id || p.sku)}`} className="text-indigo-600 hover:text-indigo-900">Edit</Link>
-                        <button onClick={() => handleDelete(p._id || p.sku)} className="ml-4 text-red-600 hover:text-red-900">Delete</button>
+                        <Link href={`/admin/products/edit/${encodeURIComponent(p._id || p.sku)}`} className="text-indigo-600 hover:text-indigo-900 font-medium hover:underline transition-colors">Edit</Link>
+                        <button onClick={() => handleDelete(p._id || p.sku)} className="ml-4 text-red-600 hover:text-red-900 font-medium hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-red-600/50 rounded">Delete</button>
                       </td>
                     </tr>
                   ))}

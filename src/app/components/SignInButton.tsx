@@ -128,7 +128,7 @@ export default function SignInButton() {
       {!user ? (
         <button
           onClick={handleGoogleSignIn}
-          className="inline-flex items-center gap-2 bg-[#2d5016] hover:bg-[#3d6820] text-white font-medium text-sm px-4 py-2 rounded-md transition-all shadow-sm hover:shadow-md"
+          className="inline-flex items-center gap-2 bg-organicGreen hover:bg-organicGreenLight text-white font-semibold text-sm px-4 py-2 rounded-lg transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-organicGreen/50"
           aria-haspopup="menu"
         >
           <svg
@@ -158,7 +158,7 @@ export default function SignInButton() {
                 className="rounded-full border-2 border-gray-200"
               />
             ) : (
-              <div className="w-8 h-8 rounded-full bg-[#2d5016] text-white flex items-center justify-center text-sm font-semibold">
+              <div className="w-8 h-8 rounded-full bg-organicGreen text-white flex items-center justify-center text-sm font-semibold">
                 {user.displayName?.charAt(0) || "U"}
               </div>
             )}

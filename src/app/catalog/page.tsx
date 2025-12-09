@@ -109,10 +109,10 @@ export default function CatalogPage() {
                     <button
                       key={category}
                       onClick={() => setSelectedCategory(category)}
-                      className={`block w-full text-left px-4 py-2.5 rounded-lg text-sm transition-all duration-200 ${
+                      className={`block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-organicGreen/50 ${
                         selectedCategory === category
-                          ? 'bg-organicGreen text-white font-semibold shadow-md'
-                          : 'text-gray-700 hover:bg-gray-50 hover:text-organicGreen'
+                          ? 'bg-organicGreen text-white font-semibold shadow-md hover:bg-organicGreenLight'
+                          : 'text-gray-700 hover:bg-green-50 hover:text-organicGreen border border-transparent hover:border-green-200'
                       }`}
                     >
                       {category}

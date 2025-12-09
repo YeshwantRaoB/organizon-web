@@ -87,9 +87,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ form, onChange, images, setIm
       </div>
 
       <div className="pt-5">
-        <div className="flex justify-end">
-          <button type="button" onClick={() => window.history.back()} className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
-          <button type="submit" disabled={uploading} className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-organicGreen hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">{buttonText}</button>
+        <div className="flex justify-end gap-3">
+          <button type="button" onClick={() => window.history.back()} className="bg-white py-2 px-6 border-2 border-gray-300 rounded-lg shadow-sm text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300/50">Cancel</button>
+          <button type="submit" disabled={uploading} className="inline-flex justify-center py-2 px-6 border border-transparent shadow-md text-sm font-semibold rounded-lg text-white bg-organicGreen hover:bg-organicGreenLight focus:outline-none focus:ring-4 focus:ring-organicGreen/50 disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed disabled:hover:bg-gray-400 transition-all duration-200">{buttonText}</button>
         </div>
       </div>
     </form>

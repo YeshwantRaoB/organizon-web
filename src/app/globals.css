@@ -123,7 +123,7 @@ button {
   box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
 }
 
-/* Button Styles */
+/* Button Styles - Enhanced for Organic Theme */
 .btn {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -143,6 +143,34 @@ button {
 .btn-primary:hover {
   background-color: #3d6820;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure all buttons have proper visibility and contrast */
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Organic theme button base styles */
+button[class*="bg-organicGreen"],
+a[class*="bg-organicGreen"] {
+  background-color: #2d5016 !important;
+  color: white !important;
+}
+
+button[class*="bg-organicGreen"]:hover:not(:disabled),
+a[class*="bg-organicGreen"]:hover {
+  background-color: #3d6820 !important;
+}
+
+/* Ensure text is visible on organic green buttons */
+button[class*="bg-organicGreen"] *,
+a[class*="bg-organicGreen"] * {
+  color: white !important;
 }
 
 /* Smooth transitions */

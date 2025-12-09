@@ -121,10 +121,10 @@ export default function FAQPage() {
         <div className="mb-8 flex flex-wrap gap-3 justify-center">
           <button
             onClick={() => setSelectedCategory('All')}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-organicGreen/50 ${
               selectedCategory === 'All'
-                ? 'bg-[#2d5016] text-white'
-                : 'bg-white text-gray-700 hover:bg-gray-100'
+                ? 'bg-organicGreen text-white shadow-md hover:bg-organicGreenLight'
+                : 'bg-white text-gray-700 hover:bg-green-50 border border-transparent hover:border-green-200'
             }`}
           >
             All
@@ -133,10 +133,10 @@ export default function FAQPage() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-organicGreen/50 ${
                 selectedCategory === category
-                  ? 'bg-[#2d5016] text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  ? 'bg-organicGreen text-white shadow-md hover:bg-organicGreenLight'
+                  : 'bg-white text-gray-700 hover:bg-green-50 border border-transparent hover:border-green-200'
               }`}
             >
               {category}
@@ -198,7 +198,7 @@ export default function FAQPage() {
           </p>
           <a
             href="/contact"
-            className="inline-block bg-[#2d5016] hover:bg-[#3d6820] text-white font-semibold px-8 py-3 rounded-md transition-all duration-300 shadow-md hover:shadow-lg"
+            className="inline-block bg-organicGreen hover:bg-organicGreenLight text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-organicGreen/50"
           >
             Contact Support
           </a>

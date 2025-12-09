@@ -130,7 +130,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     placeholder="Enter your email"
                     className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white/50 placeholder:text-gray-500"
                   />
-                  <button className="bg-white text-organicGreen font-semibold px-6 py-3 rounded-lg hover:bg-green-50 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                  <button className="bg-white text-organicGreen font-semibold px-6 py-3 rounded-lg hover:bg-green-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50">
                     Subscribe
                   </button>
                 </div>

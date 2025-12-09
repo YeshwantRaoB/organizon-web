@@ -68,7 +68,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             e.preventDefault();
             addToCart({ ...product, _id: product.id });
           }}
-          className="w-full bg-green-700 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-800 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+          className="w-full bg-organicGreen hover:bg-organicGreenLight text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none disabled:hover:bg-gray-400"
           disabled={isOutOfStock}
         >
           {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
