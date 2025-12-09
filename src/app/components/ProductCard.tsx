@@ -63,12 +63,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
       </Link>
       <div className="px-5 pb-5">
-        <button 
+        <button
           onClick={(e) => {
             e.preventDefault();
             addToCart({ ...product, _id: product.id });
           }}
-          className="w-full bg-organicGreen text-white py-3 px-4 rounded-lg font-semibold hover:bg-organicGreenLight transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+          className="w-full bg-green-700 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-800 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
           disabled={isOutOfStock}
         >
           {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}

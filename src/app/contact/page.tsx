@@ -55,7 +55,7 @@ export default function ContactPage() {
 
           <div className="bg-white border border-gray-200 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="flex items-start gap-4">
-              <div className="w-14 h-14 bg-gradient-to-br from-organicGreen to-organicGreenLight rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-14 h-14 bg-gradient-to-br from-green-700 to-green-800 rounded-full flex items-center justify-center flex-shrink-0">
                 <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -97,7 +97,7 @@ export default function ContactPage() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-organicGreen/50 focus:border-organicGreen transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-700/50 focus:border-green-700 transition-colors"
                   placeholder="John Doe"
                 />
               </div>
@@ -113,7 +113,7 @@ export default function ContactPage() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-organicGreen/50 focus:border-organicGreen transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-700/50 focus:border-green-700 transition-colors"
                   placeholder="john@example.com"
                 />
               </div>
@@ -145,7 +145,7 @@ export default function ContactPage() {
                 required
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-organicGreen/50 focus:border-organicGreen resize-none transition-colors"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-700/50 focus:border-green-700 resize-none transition-colors"
                 placeholder="Tell us how we can help you..."
               />
             </div>
@@ -153,7 +153,7 @@ export default function ContactPage() {
             <div>
               <button
                 type="submit"
-                className="w-full md:w-auto bg-organicGreen hover:bg-organicGreenLight text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+                className="w-full md:w-auto bg-green-700 hover:bg-green-800 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
               >
                 Send Message
               </button>

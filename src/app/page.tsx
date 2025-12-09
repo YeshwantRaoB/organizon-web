@@ -55,7 +55,7 @@ export default function Home() {
                 </p>
               <Link
                 href="/catalog"
-                className="inline-block bg-organicGreen hover:bg-organicGreenLight text-white font-semibold text-lg px-8 py-4 rounded-lg transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-organicGreen/50"
+                className="inline-block bg-green-700 hover:bg-green-800 text-white font-semibold text-lg px-8 py-4 rounded-lg transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-700/50"
               >
                 Shop Now
               </Link>
@@ -114,7 +114,7 @@ export default function Home() {
               <div className="mt-8">
                 <Link
                   href="/catalog"
-                  className="inline-block bg-organicGreen hover:bg-organicGreenLight text-white font-semibold text-lg px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-organicGreen/50"
+                  className="inline-block bg-green-700 hover:bg-green-800 text-white font-semibold text-lg px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-700/50"
                 >
                   Explore Our Products
                 </Link>
@@ -244,7 +244,7 @@ export default function Home() {
           <div className="text-center mt-12 animate-fade-in" style={{animationDelay: '0.5s'}}>
             <Link
               href="/catalog"
-              className="inline-block bg-organicGreen hover:bg-organicGreenLight text-white font-semibold text-lg px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-organicGreen/50"
+              className="inline-block bg-green-700 hover:bg-green-800 text-white font-semibold text-lg px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-700/50"
             >
               View All Products
             </Link>
