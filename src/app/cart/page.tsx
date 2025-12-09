@@ -3,9 +3,33 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCartStore } from '../lib/cartStore';
+import { useEffect } from 'react';
+import { auth } from '../lib/firebaseClient';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function CartPage() {
-  const { items: cartItems, removeFromCart, updateQuantity } = useCartStore();
+  const { items: cartItems, removeFromCart, updateQuantity, setCart } = useCartStore();
+  const [user, loading, error] = useAuthState(auth);
+
+  // Fetch cart from backend when user logs in or component mounts
+  useEffect(() => {
+    const fetchCart = async () => {
+      if (user) {
+        const idToken = await user.getIdToken();
+        const response = await fetch('/api/cart', {
+          headers: {
+            'Authorization': `Bearer ${idToken}`,
+          },
+        });
+        const data = await response.json();
+        if (response.ok && data.cart) {
+          setCart(data.cart.items);
+        }
+      }
+    };
+
+    fetchCart();
+  }, [user, setCart]);
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const tax = subtotal * 0.05; // 5% tax

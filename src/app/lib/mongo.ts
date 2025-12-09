@@ -1,5 +1,6 @@
 // lib/mongo.ts
-import { MongoClient, Db } from "mongodb";
+import { MongoClient, Db, Collection } from "mongodb";
+import { Cart } from "./types";
 
 declare global {
   // allow global cache in dev to avoid reconnects
@@ -34,4 +35,10 @@ if (process.env.NODE_ENV === "development") {
 export async function getDb(): Promise<Db> {
   const connectedClient = await clientPromise;
   return connectedClient.db(dbName);
+}
+
+export async function getCartsCollection(): Promise<Collection<Cart>> {
+  const connectedClient = await clientPromise;
+  const db = connectedClient.db(dbName);
+  return db.collection<Cart>("carts");
 }

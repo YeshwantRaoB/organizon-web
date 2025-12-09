@@ -5,10 +5,37 @@ import Image from 'next/image';
 import { useCartStore } from '../lib/cartStore';
 import SignInButton from './SignInButton';
 import Navbar from './Navbar';
+import { useEffect } from 'react';
+import { auth } from '../lib/firebaseClient';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function Header() {
-  const { items } = useCartStore();
+  const { items, setCart, clearCart } = useCartStore();
+  const [user, loading, error] = useAuthState(auth);
   const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      if (user) {
+        const idToken = await user.getIdToken();
+        const response = await fetch('/api/cart', {
+          headers: {
+            'Authorization': `Bearer ${idToken}`,
+          },
+        });
+        const data = await response.json();
+        if (response.ok && data.cart) {
+          setCart(data.cart.items);
+        }
+      } else {
+        clearCart();
+      }
+    };
+
+    if (!loading) {
+      fetchCart();
+    }
+  }, [user, loading, setCart, clearCart]);
 
   return (
     <header className="bg-white/95 backdrop-blur-sm border-b border-organicGreen/20 sticky top-0 z-50 shadow-sm">

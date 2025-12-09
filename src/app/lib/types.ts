@@ -8,3 +8,20 @@ export interface ProductFormData {
   stock: number;
   unit: string;
 }
+
+export interface CartItem {
+  _id: string;
+  name: string;
+  price: number;
+  images?: string[];
+  imageUrl?: string;
+  unit?: string;
+  stock?: number;
+  quantity: number;
+}
+
+export interface Cart {
+  userId: string;
+  items: CartItem[];
+  updatedAt: Date;
+}
