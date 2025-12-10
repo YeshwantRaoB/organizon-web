@@ -29,6 +29,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               src={imageUrl} 
               alt={product.name}
               fill
+              style={{ objectFit: 'cover' }}
               className="object-cover group-hover:scale-110 transition-transform duration-500"
             />
           ) : (

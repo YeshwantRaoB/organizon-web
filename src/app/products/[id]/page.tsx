@@ -123,8 +123,8 @@ export default function ProductDetailPage() {
                   <Image
                     src={product.images[selectedImage]}
                     alt={product.name}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: 'cover' }}
                   />
                 ) : (
                   <PlaceholderImage width="100%" height="100%" text={product.name} />
@@ -149,8 +149,8 @@ export default function ProductDetailPage() {
                     <Image
                       src={image}
                       alt={`${product.name} ${index + 1}`}
-                      layout="fill"
-                      objectFit="cover"
+                      fill
+                      style={{ objectFit: 'cover' }}
                     />
                   </button>
                 ))}

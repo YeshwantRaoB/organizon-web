@@ -54,6 +54,7 @@ export default function AccountPage() {
 
               <div className="mt-6 flex flex-wrap gap-4">
                 <Link href="/orders" className="bg-organicGreen hover:bg-organicGreenLight text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-organicGreen/50">View Orders</Link>
+                <Link href="/addresses" className="bg-white border-2 border-gray-300 hover:border-organicGreen text-gray-800 hover:text-organicGreen font-semibold py-2 px-6 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-4 focus:ring-organicGreen/50">Your Addresses</Link>
                 <Link href="/account/edit" className="bg-white border-2 border-gray-300 hover:border-organicGreen text-gray-800 hover:text-organicGreen font-semibold py-2 px-6 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-4 focus:ring-organicGreen/50">Edit Profile</Link>
               </div>
             </div>

@@ -47,6 +47,7 @@ export default function Header() {
                 src="/logo.jpg"
                 alt="Organizon Organics Logo"
                 fill
+                style={{ objectFit: 'cover' }}
                 className="object-cover group-hover:scale-110 transition-transform duration-300"
               />
             </div>

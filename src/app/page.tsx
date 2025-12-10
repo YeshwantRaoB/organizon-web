@@ -38,8 +38,8 @@ export default function Home() {
           <Image
             src="/hero.png"
             alt="Organizon Organics - Pure Organic Foods"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             priority
           />
           {/* Overlay for better text readability */}
@@ -72,8 +72,8 @@ export default function Home() {
               <Image
                 src="https://organizonorganics.myshopify.com/cdn/shop/files/Yellow_And_Green_Traditional_Indian_Farmer_YouTube_Thumbnail_1.png?v=1764692208&width=3840"
                 alt="Indian farmers working in organic fields"
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: 'cover' }}
                 className="hover:scale-110 transition-transform duration-700"
               />
             </div>
@@ -125,8 +125,8 @@ export default function Home() {
               <Image
                 src="https://organizonorganics.myshopify.com/cdn/shop/files/ChatGPT_Image_Dec_2_2025_10_04_27_PM.png?v=1764693292&width=1500"
                 alt="Organic products from Organizon"
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: 'cover' }}
                 className="hover:scale-110 transition-transform duration-700"
               />
             </div>

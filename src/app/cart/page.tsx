@@ -3,15 +3,47 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCartStore } from '../lib/cartStore';
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { Address } from '../lib/types';
 import { auth } from '../lib/firebaseClient';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function CartPage() {
   const { items: cartItems, removeFromCart, updateQuantity, setCart } = useCartStore();
   const [user, loading, error] = useAuthState(auth);
+  const [addresses, setAddresses] = useState<Address[]>([]);
+  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
 
-  // Fetch cart from backend when user logs in or component mounts
+  const fetchAddresses = useCallback(async () => {
+    if (user) {
+      const cachedAddresses = localStorage.getItem('addresses');
+      if (cachedAddresses) {
+        const parsedAddresses = JSON.parse(cachedAddresses);
+        setAddresses(parsedAddresses);
+        const defaultAddress = parsedAddresses.find((addr: Address) => addr.isDefault);
+        if (defaultAddress) {
+          setSelectedAddress(defaultAddress);
+        }
+      }
+
+      const idToken = await user.getIdToken();
+      const response = await fetch('/api/user/addresses', {
+        headers: {
+          'Authorization': `Bearer ${idToken}`,
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setAddresses(data);
+        localStorage.setItem('addresses', JSON.stringify(data));
+        const defaultAddress = data.find((addr: Address) => addr.isDefault);
+        if (defaultAddress) {
+          setSelectedAddress(defaultAddress);
+        }
+      }
+    }
+  }, [user]);
+
   useEffect(() => {
     const fetchCart = async () => {
       if (user) {
@@ -28,8 +60,19 @@ export default function CartPage() {
       }
     };
 
-    fetchCart();
-  }, [user, setCart]);
+    if (user) {
+      fetchCart();
+      fetchAddresses();
+    }
+  }, [user, setCart, fetchAddresses]);
+
+  if (loading) {
+    return <div className="text-center p-12">Loading cart...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center p-12 text-red-600">Error loading cart: {error.message}</div>;
+  }
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const tax = subtotal * 0.05; // 5% tax
@@ -68,6 +111,7 @@ export default function CartPage() {
                           src={item.images?.[0] || item.imageUrl || '/product-image.webp'} 
                           alt={item.name} 
                           fill
+                          style={{ objectFit: 'cover' }}
                           className="object-cover" 
                         />
                       </div>
@@ -127,6 +171,30 @@ export default function CartPage() {
                     </div>
                   ))}
                 </div>
+              </div>
+            </div>
+
+            {/* Shipping Information */}
+            <div className="lg:col-span-2 space-y-4">
+              <div className="bg-white rounded-lg shadow-sm p-6">
+                <h2 className="text-xl font-bold text-gray-900 mb-6">Shipping Information</h2>
+                {addresses.length > 0 ? (
+                  <select 
+                    className="select select-bordered w-full mb-4"
+                    onChange={(e) => setSelectedAddress(addresses.find(a => a._id === e.target.value) || null)}
+                    value={selectedAddress?._id || ''}
+                  >
+                    <option disabled value="">Select a saved address</option>
+                    {addresses.map(addr => (
+                      <option key={addr._id} value={addr._id}>
+                        {addr.fullName}, {addr.streetAddress}, {addr.city}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <p className="text-gray-600 mb-4">You have no saved addresses.</p>
+                )}
+                <Link href="/addresses" className="btn btn-secondary">Manage Addresses</Link>
               </div>
             </div>
 

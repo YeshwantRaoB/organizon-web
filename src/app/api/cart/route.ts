@@ -1,15 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAuth } from "firebase-admin/auth";
-import { getDb, getCartsCollection } from '../../lib/mongo'; // Assuming mongo.ts is in lib
-import { Cart } from '../../lib/types'; // Assuming types.ts is in lib
+import dbConnect from '../../lib/mongoose';
+import Cart from '../../lib/models/cart';
 import { initializeApp, getApps, cert } from 'firebase-admin/app';
 
 // Initialize Firebase Admin if not already initialized
-if (!getApps().length) {
-  initializeApp({
-    credential: cert(JSON.parse(process.env.FIREBASE_ADMIN_SDK_CONFIG!)),
-  });
-}
 
 // GET /api/cart - Fetch user's cart
 export async function GET(req: NextRequest) {
@@ -28,8 +23,8 @@ export async function GET(req: NextRequest) {
     }
 
     const userId = decodedToken.uid;
-    const cartsCollection = await getCartsCollection();
-    const cart = await cartsCollection.findOne({ userId });
+    await dbConnect();
+    const cart = await Cart.findOne({ userId });
 
     return NextResponse.json({ cart: cart || { userId, items: [] } }, { status: 200 });
   } catch (error) {
@@ -61,8 +56,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Invalid cart items format' }, { status: 400 });
     }
 
-    const cartsCollection = await getCartsCollection();
-    const result = await cartsCollection.updateOne(
+    await dbConnect();
+    const result = await Cart.updateOne(
       { userId },
       { $set: { userId, items, updatedAt: new Date() } },
       { upsert: true }

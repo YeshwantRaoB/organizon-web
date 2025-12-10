@@ -25,3 +25,18 @@ export interface Cart {
   items: CartItem[];
   updatedAt: Date;
 }
+
+export interface Address {
+  _id: string;
+  userId: string;
+  fullName: string;
+  phoneNumber: string;
+  streetAddress: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+  isDefault: boolean;
+  addressType: 'Home' | 'Work' | 'Other';
+}
+

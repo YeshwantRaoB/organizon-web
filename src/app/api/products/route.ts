@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "../../lib/mongo";
+import dbConnect from "../../lib/mongoose";
+import Product from "../../lib/models/product";
 
 export async function GET(request: NextRequest) {
   try {
@@ -8,8 +9,7 @@ export async function GET(request: NextRequest) {
     const category = searchParams.get("category");
     const search = searchParams.get("search");
 
-    const db = await getDb();
-    const productsCollection = db.collection("products");
+    await dbConnect();
 
     // Build query
     const query: { 
@@ -28,10 +28,7 @@ export async function GET(request: NextRequest) {
       ];
     }
 
-    const products = await productsCollection
-      .find(query)
-      .limit(limit)
-      .toArray();
+    const products = await Product.find(query).limit(limit);
 
     return NextResponse.json({ ok: true, products });
   } catch (error) {
