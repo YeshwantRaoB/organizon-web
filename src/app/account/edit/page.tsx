@@ -1,22 +1,25 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '@/app/lib/firebaseClient';
-import { updateProfile } from 'firebase/auth';
+import { useState, useCallback } from 'react';
+import { updateProfile, type User } from 'firebase/auth';
 import toast, { Toaster } from 'react-hot-toast';
+import { useAuth } from '@/app/hooks/useAuth';
 
 export default function EditProfilePage() {
-  const [user, loading] = useAuthState(auth);
   const [displayName, setDisplayName] = useState('');
   const [photoURL, setPhotoURL] = useState('');
 
-  useEffect(() => {
-    if (user) {
-      setDisplayName(user.displayName || '');
-      setPhotoURL(user.photoURL || '');
+  const handleUserChange = useCallback((currentUser: User | null) => {
+    if (currentUser) {
+      setDisplayName(currentUser.displayName || '');
+      setPhotoURL(currentUser.photoURL || '');
+    } else {
+      setDisplayName('');
+      setPhotoURL('');
     }
-  }, [user]);
+  }, []);
+
+  const { user, loading } = useAuth(handleUserChange);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

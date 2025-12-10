@@ -11,7 +11,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function Header() {
   const { items, setCart, clearCart } = useCartStore();
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function Header() {
               </svg>
               <span className="hidden sm:inline">Cart</span>
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-organicGreen text-white text-xs font-bold rounded-full flex items-center justify-center shadow-md">
+                <span className="absolute -top-2 -right-2 min-w-[1.4rem] h-5 px-1 bg-organicGreen text-black text-[11px] font-semibold rounded-full flex items-center justify-center shadow-md border border-white z-10">
                   {cartCount > 99 ? '99+' : cartCount}
                 </span>
               )}

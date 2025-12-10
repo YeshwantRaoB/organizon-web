@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAuth } from "firebase-admin/auth";
 import dbConnect from '../../lib/mongoose';
 import Cart from '../../lib/models/cart';
-import { initializeApp, getApps, cert } from 'firebase-admin/app';
+import { adminAuth } from '../../lib/firebaseAdmin';
 
 // Initialize Firebase Admin if not already initialized
 
@@ -17,8 +16,8 @@ export async function GET(req: NextRequest) {
     const idToken = authorization.split('Bearer ')[1];
     let decodedToken;
     try {
-      decodedToken = await getAuth().verifyIdToken(idToken);
-    } catch (error) {
+      decodedToken = await adminAuth.verifyIdToken(idToken);
+    } catch {
       return NextResponse.json({ message: 'Unauthorized: Invalid token' }, { status: 401 });
     }
 
@@ -44,8 +43,8 @@ export async function POST(req: NextRequest) {
     const idToken = authorization.split('Bearer ')[1];
     let decodedToken;
     try {
-      decodedToken = await getAuth().verifyIdToken(idToken);
-    } catch (error) {
+      decodedToken = await adminAuth.verifyIdToken(idToken);
+    } catch {
       return NextResponse.json({ message: 'Unauthorized: Invalid token' }, { status: 401 });
     }
 

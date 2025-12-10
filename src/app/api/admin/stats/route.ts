@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { adminAuth } from "../../../lib/firebaseAdmin";
-import { getDb } from "../../../lib/mongo";
+import { adminAuth } from "@/app/lib/firebaseAdmin";
+import { getDb } from "@/app/lib/mongo";
 
 async function verifyAdmin(request: NextRequest) {
   const authHeader = request.headers.get("authorization");
@@ -66,6 +66,9 @@ export async function GET(request: NextRequest) {
 
     const totalRevenue = revenueResult[0]?.total || 0;
 
+    type CategoryAgg = { _id: string; count: number };
+    const categoryAggs = categories as CategoryAgg[];
+
     return NextResponse.json({
       ok: true,
       stats: {
@@ -78,7 +81,7 @@ export async function GET(request: NextRequest) {
           total: totalOrders,
           revenue: totalRevenue,
         },
-        categories: categories.map(c => ({
+        categories: categoryAggs.map((c) => ({
           name: c._id,
           count: c.count,
         })),

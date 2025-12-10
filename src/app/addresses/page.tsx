@@ -17,8 +17,14 @@ export default function AddressesPage() {
     if (!user) return;
 
     const cachedAddresses = localStorage.getItem('addresses');
+    let nextAddresses: Address[] | null = null;
+
     if (cachedAddresses) {
-      setAddresses(JSON.parse(cachedAddresses));
+      try {
+        nextAddresses = JSON.parse(cachedAddresses) as Address[];
+      } catch {
+        nextAddresses = null;
+      }
     }
 
     const token = await user.getIdToken();
@@ -27,21 +33,30 @@ export default function AddressesPage() {
         Authorization: `Bearer ${token}`,
       },
     });
+
     if (res.ok) {
-      const data = await res.json();
-      setAddresses(data);
+      const data = (await res.json()) as Address[];
+      nextAddresses = data;
       localStorage.setItem('addresses', JSON.stringify(data));
       setError(null);
     } else {
       setError('Failed to fetch addresses. Please try again later.');
-      setAddresses([]);
+      nextAddresses = [];
+    }
+
+    if (nextAddresses) {
+      setAddresses(nextAddresses);
     }
   }, [user]);
 
   useEffect(() => {
-    if (user) {
-      fetchAddresses();
-    }
+    if (!user) return;
+
+    const timeoutId = setTimeout(() => {
+      void fetchAddresses();
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
   }, [user, fetchAddresses]);
 
 

@@ -9,6 +9,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "firebasestorage.googleapis.com", // You WILL need this later for product images
+      },
+      {
+        protocol: "https",
+        hostname: "organizonorganics.myshopify.com",
       }
     ],
   },

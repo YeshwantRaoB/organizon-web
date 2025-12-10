@@ -15,55 +15,63 @@ export default function CartPage() {
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
 
   const fetchAddresses = useCallback(async () => {
-    if (user) {
-      const cachedAddresses = localStorage.getItem('addresses');
-      if (cachedAddresses) {
-        const parsedAddresses = JSON.parse(cachedAddresses);
-        setAddresses(parsedAddresses);
-        const defaultAddress = parsedAddresses.find((addr: Address) => addr.isDefault);
-        if (defaultAddress) {
-          setSelectedAddress(defaultAddress);
-        }
-      }
+    if (!user) return;
 
+    const cachedAddresses = localStorage.getItem('addresses');
+    let nextAddresses: Address[] = [];
+    let nextSelected: Address | null = null;
+
+    if (cachedAddresses) {
+      try {
+        const parsedAddresses = JSON.parse(cachedAddresses) as Address[];
+        nextAddresses = parsedAddresses;
+        nextSelected = parsedAddresses.find((addr) => addr.isDefault) || null;
+      } catch {
+        nextAddresses = [];
+        nextSelected = null;
+      }
+    }
+
+    const idToken = await user.getIdToken();
+    const response = await fetch('/api/user/addresses', {
+      headers: {
+        'Authorization': `Bearer ${idToken}`,
+      },
+    });
+
+    if (response.ok) {
+      const data = (await response.json()) as Address[];
+      nextAddresses = data;
+      localStorage.setItem('addresses', JSON.stringify(data));
+      nextSelected = data.find((addr) => addr.isDefault) || null;
+    }
+
+    setAddresses(nextAddresses);
+    setSelectedAddress(nextSelected);
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const run = async () => {
       const idToken = await user.getIdToken();
-      const response = await fetch('/api/user/addresses', {
+      const response = await fetch('/api/cart', {
         headers: {
           'Authorization': `Bearer ${idToken}`,
         },
       });
       const data = await response.json();
-      if (response.ok) {
-        setAddresses(data);
-        localStorage.setItem('addresses', JSON.stringify(data));
-        const defaultAddress = data.find((addr: Address) => addr.isDefault);
-        if (defaultAddress) {
-          setSelectedAddress(defaultAddress);
-        }
+      if (response.ok && data.cart) {
+        setCart(data.cart.items);
       }
-    }
-  }, [user]);
-
-  useEffect(() => {
-    const fetchCart = async () => {
-      if (user) {
-        const idToken = await user.getIdToken();
-        const response = await fetch('/api/cart', {
-          headers: {
-            'Authorization': `Bearer ${idToken}`,
-          },
-        });
-        const data = await response.json();
-        if (response.ok && data.cart) {
-          setCart(data.cart.items);
-        }
-      }
+      await fetchAddresses();
     };
 
-    if (user) {
-      fetchCart();
-      fetchAddresses();
-    }
+    const timeoutId = setTimeout(() => {
+      void run();
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
   }, [user, setCart, fetchAddresses]);
 
   if (loading) {

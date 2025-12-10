@@ -5,7 +5,7 @@ import Address from '@/app/lib/models/address';
 import AuditLog from '@/app/lib/models/auditLog';
 
 
-export async function PUT(req: NextRequest, { params }: { params: { addressId: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ addressId: string }> }) {
   const authorization = req.headers.get('Authorization');
   if (!authorization?.startsWith('Bearer ')) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
@@ -15,7 +15,7 @@ export async function PUT(req: NextRequest, { params }: { params: { addressId: s
   try {
     const decodedToken = await getAuth().verifyIdToken(idToken);
     const userId = decodedToken.uid;
-    const { addressId } = params;
+    const { addressId } = await params;
 
     await dbConnect();
 
@@ -57,7 +57,7 @@ export async function PUT(req: NextRequest, { params }: { params: { addressId: s
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { addressId: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ addressId: string }> }) {
   const authorization = req.headers.get('Authorization');
   if (!authorization?.startsWith('Bearer ')) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
@@ -67,7 +67,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { addressId
   try {
     const decodedToken = await getAuth().verifyIdToken(idToken);
     const userId = decodedToken.uid;
-    const { addressId } = params;
+    const { addressId } = await params;
 
     await dbConnect();
 

@@ -45,7 +45,7 @@ const saveCartToBackend = async (cartItems: CartItem[]) => {
 
 export const useCartStore = create<CartState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       items: [],
       addToCart: (product) =>
         set((state) => {
